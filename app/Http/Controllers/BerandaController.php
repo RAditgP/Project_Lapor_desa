@@ -8,6 +8,6 @@ class BerandaController extends Controller
 {
     public function index()
     {
-        return view('Beranda'); // resources/views/Beranda.blade.php
+        return view('beranda'); // resources/views/Beranda.blade.php
     }
 }

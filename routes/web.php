@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InformasiDesaController;
+
 use App\Http\Controllers\PengaduanController;
 
 /*
@@ -19,9 +21,10 @@ Route::view('/layanan', 'pages.layanan')->name('layanan');
 Route::view('/profil', 'pages.profil')->name('profil');
 Route::view('/layanan/pengajuan-surat', 'pages.isi layanan.pengajuan-surat');
 Route::view('/layanan/laporan-masyarakat', 'pages.isi layanan.laporan-masyarakat');
-Route::view('/layanan/informasi-desa', 'pages.isi layanan.informasi-desa');
 Route::view('/layanan/donasi-desa', 'pages.isi layanan.donasi-desa');
 
 // Halaman Pengaduan (dinamis, pakai controller)
 Route::get('/pengaduan', [PengaduanController::class, 'create'])->name('pengaduan.create');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+Route::get('/layanan/informasi-desa', [InformasiDesaController::class, 'index'])->name('layanan.informasi-desa');
+

@@ -1,4 +1,3 @@
-@extends('layouts.form')
 @extends('layouts.navbar')
 
 @section('title', 'Form Pengaduan')

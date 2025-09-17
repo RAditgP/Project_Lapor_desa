@@ -39,6 +39,8 @@
                        class="block px-4 py-2 hover:bg-gray-100">Laporan Masyarakat</a>
                     <a href="{{ url('/layanan/informasi-desa') }}" 
                        class="block px-4 py-2 hover:bg-gray-100">Informasi Data Desa</a>
+                       <a href="{{ url('/layanan/donasi-desa') }}" 
+                       class="block px-4 py-2 hover:bg-gray-100">Donasi Desa</a>
                 </div>
             </li>
          <a href="{{ url('/pengaduan') }}" class="hover:text-yellow-400 font-medium">Pengaduan</a>

@@ -78,7 +78,10 @@
                 </div>
 
                 {{-- Gambar Desa --}}
-                
+                <div class="col-md-4 text-center">
+                    <img src="{{ asset('images/konoha.jpg') }}" alt="Gambar Desa Konoha" 
+                         class="img-fluid rounded shadow">
+                </div>
             </div>
         </div>
     </div>

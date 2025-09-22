@@ -32,14 +32,15 @@
     </main>
 
    <!-- Footer -->
+<!-- Footer -->
 <footer class="bg-emerald-900 text-white py-8 mt-6 shadow-inner">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
 
-        <!-- Logo Desa -->
+        <!-- Logo & Nama Desa -->
         <div class="flex flex-col items-center md:items-start">
-            <img src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa" class="w-20 h-20 mb-3">
-            <h2 class="text-lg font-bold text-yellow-400">LAPOR DESA</h2>
-            <p class="text-sm text-gray-300">Layanan Aspirasi & Pengaduan Masyarakat Desa</p>
+            <h2 class="text-lg font-bold text-yellow-400 mb-2">LAPOR DESA</h2>
+            <img src="{{ asset('images/logo.jpg') }}" alt="Logo Desa" class="w-20 h-20">
+            <p class="text-sm text-gray-300 mb-3">Layanan Aspirasi & Pengaduan Masyarakat Desa</p>
         </div>
 
         <!-- Kontak -->
@@ -51,13 +52,12 @@
         </div>
 
         <!-- Copyright -->
-        <div class="flex flex-col justify-center text-center md:text-right">
+        <div class="text-center md:text-right">
             <p>&copy; {{ date('Y') }} <span class="text-yellow-400">Lapor Desa</span>.</p>
             <p class="text-sm text-gray-300">Semua Hak Dilindungi.</p>
         </div>
     </div>
 </footer>
-
 
 </body>
 </html>

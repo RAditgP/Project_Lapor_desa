@@ -1,56 +1,54 @@
 @extends('layouts.navbar')
 
-@section('title', 'Form Pengaduan')
+@section('title', 'Pengajuan Surat Online')
 
 @section('content')
-<div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
-    <h1 class="text-2xl font-bold text-emerald-800 mb-4">Form Pengajuan surat</h1>
-    <p class="mb-6 text-gray-600">Silakan isi formulir berikut untuk menyampaikan Pengajuan surat Anda.</p>
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
+        <h1 class="text-3xl font-bold text-center text-emerald-700 mb-6">Formulir Pengajuan Surat</h1>
+        <p class="text-center text-gray-600 mb-8">
+            Silakan isi formulir di bawah ini untuk mengajukan permohonan surat.
+        </p>
 
-    <!-- Form Pengaduan -->
-    <form action="{{ url('/pengajuan') }}" method="POST" class="space-y-5">
-        @csrf
+        <form action="#" method="POST" class="space-y-6">
+            @csrf
 
-        <!-- Nama -->
-        <div>
-            <label for="nama" class="block font-medium text-gray-700">Nama Lengkap</label>
-            <input type="text" name="nama" id="nama" 
-                   class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                   placeholder="Masukkan nama lengkap Anda" required>
-        </div>
+            <div>
+                <label for="nama" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">
+            </div>
 
-        <!-- NIK -->
-        <div>
-            <label for="nik" class="block font-medium text-gray-700">NIK</label>
-            <input type="text" name="nik" id="nik" 
-                   class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                   placeholder="Masukkan NIK Anda" required>
-        </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email</label>
+                <input type="email" id="email" name="email" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">
+            </div>
+            
+            <div>
+                <label for="jenis_surat" class="block text-sm font-medium text-gray-700">Jenis Surat</label>
+                <select id="jenis_surat" name="jenis_surat" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">
+                    <option value="">Pilih Jenis Surat</option>
+                    <option value="surat_domisili">Surat Keterangan Domisili</option>
+                    <option value="surat_usaha">Surat Izin Usaha</option>
+                    <option value="surat_lainnya">Surat Keterangan Lainnya</option>
+                </select>
+            </div>
 
-        <!-- Nomor Telepon -->
-        <div>
-            <label for="telepon" class="block font-medium text-gray-700">Nomor Telepon</label>
-            <input type="text" name="telepon" id="telepon" 
-                   class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                   placeholder="Masukkan nomor telepon Anda" required>
-        </div>
+            <div>
+                <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi Permohonan</label>
+                <textarea id="deskripsi" name="deskripsi" rows="4" required
+                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"></textarea>
+            </div>
 
-        <!-- Judul Pengaduan -->
-        <div>
-            <label for="judul" class="block font-medium text-gray-700">Surat Yang Ingin Diajukan</label>
-            <input type="text" name="judul" id="judul" 
-                   class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                   placeholder="Masukkan judul pengaduan" required>
-        </div>
-
-       
-        <!-- Tombol Submit -->
-        <div class="text-right">
-            <button type="submit" 
-                    class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2 rounded shadow-md">
-                Kirim Pengajuan
-            </button>
-        </div>
-    </form>
+            <div class="flex justify-end">
+                <button type="submit"
+                        class="px-6 py-2 bg-emerald-700 text-white font-medium rounded-md shadow-sm hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors">
+                    Ajukan Surat
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 @endsection

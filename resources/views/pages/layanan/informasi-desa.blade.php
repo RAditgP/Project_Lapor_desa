@@ -1,21 +1,49 @@
 @extends('layouts.navbar')
 
-@section('title', 'Form informasi desa')
-@section('content')
-<div class="container mx-auto px-6 py-6">
-    <div class="bg-white shadow-md rounded-lg p-6">
-        <h1 class="text-2xl font-bold text-green-700 mb-4">Informasi Data Desa</h1>
+@section('title', 'Informasi Data Desa Konohagakure')
 
-        <div class="space-y-3">
-            <p><span class="font-semibold">Nama Desa:</span> Desa Contoh</p>
-            <p><span class="font-semibold">Kecamatan:</span> Kecamatan Contoh</p>
-            <p><span class="font-semibold">Kabupaten:</span> Kabupaten Contoh</p>
-            <p><span class="font-semibold">Provinsi:</span> Provinsi Contoh</p>
-            <p><span class="font-semibold">Jumlah Penduduk:</span> 5.000 jiwa</p>
-            <p><span class="font-semibold">Luas Wilayah:</span> 15 km²</p>
-            <p><span class="font-semibold">Kepala Desa:</span> Bapak Andi</p>
+@section('content')
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h1 class="text-3xl font-bold text-center text-emerald-700 mb-6">Informasi Data Desa Konohagakure</h1>
+     
+        
+        <div class="space-y-4 text-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
+                <span class="font-semibold text-gray-700">Nama Desa:</span>
+                <span class="text-gray-900">Konohagakure</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
+                <span class="font-semibold text-gray-700">Kecamatan:</span>
+                <span class="text-gray-900">Shinobi</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
+                <span class="font-semibold text-gray-700">Kabupaten:</span>
+                <span class="text-gray-900">Negara Api</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
+                <span class="font-semibold text-gray-700">Provinsi:</span>
+                <span class="text-gray-900">Negara Api</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
+                <span class="font-semibold text-gray-700">Jumlah Penduduk:</span>
+                <span class="text-gray-900">~15.000 jiwa</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
+                <span class="font-semibold text-gray-700">Luas Wilayah:</span>
+                <span class="text-gray-900">50 km²</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
+                <span class="font-semibold text-gray-700">Kepala Desa (Hokage):</span>
+                <span class="text-gray-900">Naruto Uzumaki</span>
+            </div>
         </div>
     </div>
 </div>
-    
 @endsection

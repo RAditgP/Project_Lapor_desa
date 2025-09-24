@@ -19,9 +19,9 @@ Route::view('/', 'pages.beranda')->name('beranda');
 Route::view('/pengumuman', 'pages.pengumuman')->name('pengumuman');
 Route::view('/layanan', 'pages.layanan')->name('layanan');
 Route::view('/profil', 'pages.profil')->name('profil');
-Route::view('/layanan/pengajuan-surat', 'pages.isi layanan.pengajuan-surat');
-Route::view('/layanan/laporan-masyarakat', 'pages.isi layanan.laporan-masyarakat');
-Route::view('/layanan/donasi-desa', 'pages.isi layanan.donasi-desa');
+Route::view('/layanan/pengajuan-surat', 'pages.layanan.pengajuan-surat');
+Route::view('/layanan/laporan-masyarakat', 'pages.layanan.laporan-masyarakat');
+Route::view('/layanan/donasi-desa', 'pages.layanan.donasi-desa');
 
 // Halaman Pengaduan (dinamis, pakai controller)
 Route::get('/pengaduan', [PengaduanController::class, 'create'])->name('pengaduan.create');

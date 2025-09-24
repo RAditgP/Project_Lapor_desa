@@ -26,5 +26,8 @@ Route::view('/layanan/donasi-desa', 'pages.layanan.donasi-desa');
 // Halaman Pengaduan (dinamis, pakai controller)
 Route::get('/pengaduan', [PengaduanController::class, 'create'])->name('pengaduan.create');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+Route::get('/profil', function () {
+    return view('profil');
+});
 Route::get('/layanan/informasi-desa', [InformasiDesaController::class, 'index'])->name('layanan.informasi-desa');
 

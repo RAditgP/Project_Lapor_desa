@@ -8,6 +8,6 @@ class InformasiDesaController extends Controller
 {
     public function index()
     {
-        return view('layanan.informasi-desa');
+        return view('pages.layanan.informasi-desa');
     }
 }

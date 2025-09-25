@@ -1,32 +1,40 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InformasiDesaController; 
+use App\Http\Controllers\LayananSuratController;
 use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\InformasiDesaController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-| Semua route aplikasi kamu didefinisikan di sini.
+|
+| Semua rute aplikasi kamu didefinisikan di sini.
 | Halaman statis bisa langsung return view,
-| sedangkan yang butuh logic pakai controller.
+| sedangkan yang butuh logika pakai controller.
+|
 */
 
-// Halaman Statis
+// Halaman Beranda dan Pengumuman (Statis)
 Route::view('/', 'pages.beranda')->name('beranda');
 Route::view('/pengumuman', 'pages.pengumuman')->name('pengumuman');
-Route::view('/layanan', 'pages.layanan')->name('layanan');
-Route::view('/layanan/pengajuan-surat', 'pages.layanan.pengajuan-surat');
-Route::view('/layanan/laporan-masyarakat', 'pages.layanan.laporan-masyarakat');
-Route::view('/layanan/donasi-desa', 'pages.layanan.donasi-desa');
-Route::view('/layanan/informasi-desa', 'pages.layanan.informasi-desa')->name('layanan.informasi-desa');
+Route::view('/profil', 'pages.profil')->name('profil');
 
+// Grup Rute untuk Layanan Online
+Route::prefix('layanan')->name('layanan.')->group(function () {
+    // Halaman Statis di bawah layanan
+    Route::view('/donasi-desa', 'pages.layanan.donasi-desa')->name('donasi-desa');
+    Route::view('/laporan-masyarakat', 'pages.layanan.laporan-masyarakat')->name('laporan-masyarakat');
+    
+    // Halaman dengan Controller
+    Route::get('/informasi-desa', [InformasiDesaController::class, 'index'])->name('informasi-desa');
 
-// Halaman Pengaduan (dinamis, pakai controller)
-Route::get('/pengaduan', [PengaduanController::class, 'create'])->name('pengaduan.create');
-Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
-Route::get('/profil', function () {
-    return view('pages.profil');
+    // Layanan Pengajuan Surat (Formulir)
+    Route::get('/pengajuan-surat', [LayananSuratController::class, 'create'])->name('pengajuan-surat.create');
+    Route::post('/pengajuan-surat', [LayananSuratController::class, 'store'])->name('pengajuan-surat.store');
 });
 
+// Halaman Pengaduan Masyarakat (Formulir)
+Route::get('/pengaduan', [PengaduanController::class, 'create'])->name('pengaduan.create');
+Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');

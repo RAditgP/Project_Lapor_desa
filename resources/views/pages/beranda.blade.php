@@ -33,7 +33,7 @@
 
     <!-- Berita & Pengumuman Terbaru -->
     <section id="pengumuman-berita" class="my-12">
-        <h2 class="text-3xl font-bold text-center text-emerald-800 mb-6">Pengumuman & Berita Terbaru</h2>
+        <h2 class="text-3xl font-bold text-center text-white mb-6">Pengumuman & Berita Terbaru</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Contoh Pengumuman 1 -->
             <div class="bg-white rounded-lg shadow-md p-6">

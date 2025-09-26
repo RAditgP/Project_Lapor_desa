@@ -26,7 +26,8 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
     // Halaman Statis di bawah layanan
     Route::view('/donasi-desa', 'pages.layanan.donasi-desa')->name('donasi-desa');
     Route::view('/laporan-masyarakat', 'pages.layanan.laporan-masyarakat')->name('laporan-masyarakat');
-    
+    Route::view('/kegiatan-masyarakat', 'pages.layanan.kegiatan-masyarakat')->name('kegiatan-masyarakat');
+
     // Halaman dengan Controller
     Route::get('/informasi-desa', [InformasiDesaController::class, 'index'])->name('informasi-desa');
 

@@ -35,6 +35,7 @@
             <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white text-black rounded-lg shadow-lg invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50 transition-all duration-300 ease-in-out">
                 <a href="{{ url('/layanan/pengajuan-surat') }}" class="block px-4 py-2 hover:bg-gray-100">Pengajuan Surat</a>
                 <a href="{{ url('/layanan/laporan-masyarakat') }}" class="block px-4 py-2 hover:bg-gray-100">Laporan Masyarakat</a>
+                <a href="{{ url('/layanan/kegiatan-masyarakat') }}" class="block px-4 py-2 hover:bg-gray-100">Kegiatan Masyarakat</a>
                 <a href="{{ url('/layanan/informasi-desa') }}" class="block px-4 py-2 hover:bg-gray-100">Informasi Data Desa</a>
                 <a href="{{ url('/layanan/donasi-desa') }}" class="block px-4 py-2 hover:bg-gray-100">Donasi Desa</a>
             </div>
@@ -58,7 +59,7 @@
         <!-- Logo & Nama Desa -->
         <div class="flex flex-col items-center md:items-start">
             <h2 class="text-lg font-bold text-yellow-400 mb-2">LAPOR DESA</h2>
-            <img src="{{ asset('images/logo.jpg') }}" alt="Logo Desa" class="w-20 h-20">
+            <img src="{{ asset('images/konoha.merah.jpg') }}" alt="Logo Desa" class="w-20 h-20">
             <p class="text-sm text-gray-300 mb-3">Layanan Aspirasi & Pengaduan Masyarakat Desa</p>
         </div>
 

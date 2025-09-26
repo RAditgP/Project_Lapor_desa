@@ -3,61 +3,67 @@
 @section('title', 'Form Pengaduan')
 
 @section('content')
-<div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
-    <h1 class="text-2xl font-bold text-emerald-800 mb-4">Form Pengaduan Masyarakat</h1>
-    <p class="mb-6 text-gray-600">Silakan isi formulir berikut untuk menyampaikan pengaduan Anda.</p>
-
-    <!-- Form Pengaduan -->
-    <form action="{{ url('/pengaduan') }}" method="POST" class="space-y-5">
-        @csrf
-
-        <!-- Nama -->
-        <div>
-            <label for="nama" class="block font-medium text-gray-700">Nama Lengkap</label>
-            <input type="text" name="nama" id="nama" 
-                   class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                   placeholder="Masukkan nama lengkap Anda" required>
+<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-100 flex items-center justify-center py-12 px-4">
+    <div class="w-full max-w-2xl bg-white p-10 rounded-2xl shadow-xl border border-gray-100 animate-fade-in transform transition duration-300 hover:shadow-2xl">
+        
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-extrabold text-emerald-700">Form Pengaduan Masyarakat</h1>
+            <p class="text-gray-500 mt-2 text-base">Silakan isi formulir berikut untuk menyampaikan pengaduan Anda.</p>
         </div>
 
-        <!-- NIK -->
-        <div>
-            <label for="nik" class="block font-medium text-gray-700">NIK</label>
-            <input type="text" name="nik" id="nik" 
-                   class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                   placeholder="Masukkan NIK Anda" required>
-        </div>
+        <!-- Form -->
+        <form action="{{ url('/pengaduan') }}" method="POST" class="space-y-6">
+            @csrf
 
-        <!-- Nomor Telepon -->
-        <div>
-            <label for="telepon" class="block font-medium text-gray-700">Nomor Telepon</label>
-            <input type="text" name="telepon" id="telepon" 
-                   class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                   placeholder="Masukkan nomor telepon Anda" required>
-        </div>
+            <!-- Nama -->
+            <div>
+                <label for="nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap</label>
+                <input type="text" name="nama" id="nama" required
+                    placeholder="Masukkan nama lengkap Anda"
+                    class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+            </div>
 
-        <!-- Judul Pengaduan -->
-        <div>
-            <label for="judul" class="block font-medium text-gray-700">Judul Pengaduan</label>
-            <input type="text" name="judul" id="judul" 
-                   class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                   placeholder="Masukkan judul pengaduan" required>
-        </div>
+            <!-- NIK -->
+            <div>
+                <label for="nik" class="block text-sm font-semibold text-gray-700 mb-2">NIK</label>
+                <input type="text" name="nik" id="nik" required
+                    placeholder="Masukkan NIK Anda"
+                    class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+            </div>
 
-        <!-- Isi Pengaduan -->
-        <div>
-            <label for="isi" class="block font-medium text-gray-700">Isi Pengaduan</label>
-            <textarea name="isi" id="isi" rows="5"
-                      class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                      placeholder="Tuliskan isi pengaduan Anda" required></textarea>
-        </div>
+            <!-- Nomor Telepon -->
+            <div>
+                <label for="telepon" class="block text-sm font-semibold text-gray-700 mb-2">Nomor Telepon</label>
+                <input type="text" name="telepon" id="telepon" required
+                    placeholder="Masukkan nomor telepon Anda"
+                    class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+            </div>
 
-        <!-- Tombol Submit -->
-        <div class="text-right">
-            <button type="submit" 
-                    class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2 rounded shadow-md">
-                Kirim Pengaduan
-            </button>
-        </div>
-    </form>
+            <!-- Judul -->
+            <div>
+                <label for="judul" class="block text-sm font-semibold text-gray-700 mb-2">Judul Pengaduan</label>
+                <input type="text" name="judul" id="judul" required
+                    placeholder="Masukkan judul pengaduan"
+                    class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+            </div>
+
+            <!-- Isi -->
+            <div>
+                <label for="isi" class="block text-sm font-semibold text-gray-700 mb-2">Isi Pengaduan</label>
+                <textarea name="isi" id="isi" rows="5" required
+                    placeholder="Tuliskan isi pengaduan Anda"
+                    class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></textarea>
+            </div>
+
+            <!-- Tombol -->
+            <div class="text-center pt-4">
+                <button type="submit"
+                    class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-3 rounded-xl shadow-md transition transform hover:scale-[1.02]">
+                    Kirim Pengaduan
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 @endsection

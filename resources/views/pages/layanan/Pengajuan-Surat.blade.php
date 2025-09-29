@@ -3,8 +3,9 @@
 @section('title', 'Pengajuan Surat Online')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
+<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-100 flex items-center justify-center py-12 px-4">
+    <div class="w-full max-w-2xl bg-white p-10 rounded-2xl shadow-xl border border-gray-100 animate-fade-in transform transition duration-300 hover:shadow-2xl">
+        
         <h1 class="text-3xl font-bold text-center text-emerald-700 mb-6">Formulir Pengajuan Surat</h1>
         <p class="text-center text-gray-600 mb-8">
             Silakan isi formulir di bawah ini untuk mengajukan permohonan surat.
@@ -13,41 +14,55 @@
         <form action="#" method="POST" class="space-y-6">
             @csrf
 
-            <div>
-                <label for="nama" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                <input type="text" id="nama" name="nama" required
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">
-            </div>
+            <!-- Nama Lengkap -->
+<div>
+    <label for="nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap</label>
+    <input type="text" id="nama" name="nama" required
+           placeholder="Masukkan nama lengkap Anda"
+           class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
+                  focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+</div>
 
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email</label>
-                <input type="email" id="email" name="email" required
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">
-            </div>
-            
-            <div>
-                <label for="jenis_surat" class="block text-sm font-medium text-gray-700">Jenis Surat</label>
-                <select id="jenis_surat" name="jenis_surat" required
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">
-                    <option value="">Pilih Jenis Surat</option>
-                    <option value="surat_domisili">Surat Keterangan Domisili</option>
-                    <option value="surat_usaha">Surat Izin Usaha</option>
-                    <option value="surat_lainnya">Surat Keterangan Lainnya</option>
-                </select>
-            </div>
+<!-- Alamat Email -->
+<div>
+    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Alamat Email</label>
+    <input type="email" id="email" name="email" required
+           placeholder="Masukkan alamat email Anda"
+           class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
+                  focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+</div>
 
-            <div>
-                <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi Permohonan</label>
-                <textarea id="deskripsi" name="deskripsi" rows="4" required
-                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"></textarea>
-            </div>
+<!-- Jenis Surat -->
+<div>
+    <label for="jenis_surat" class="block text-sm font-semibold text-gray-700 mb-2">Jenis Surat</label>
+    <select id="jenis_surat" name="jenis_surat" required
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
+                   focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+        <option value="">Pilih Jenis Surat</option>
+        <option value="surat_domisili">Surat Keterangan Domisili</option>
+        <option value="surat_usaha">Surat Izin Usaha</option>
+        <option value="surat_lainnya">Surat Keterangan Lainnya</option>
+    </select>
+</div>
 
-            <div class="flex justify-end">
-                <button type="submit"
-                        class="px-6 py-2 bg-emerald-700 text-white font-medium rounded-md shadow-sm hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors">
-                    Ajukan Surat
-                </button>
-            </div>
+<!-- Deskripsi Permohonan -->
+<div>
+    <label for="deskripsi" class="block text-sm font-semibold text-gray-700 mb-2">Deskripsi Permohonan</label>
+    <textarea id="deskripsi" name="deskripsi" rows="4" required
+              placeholder="Tuliskan deskripsi permohonan Anda"
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
+                     focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></textarea>
+</div>
+
+<!-- Tombol Submit -->
+<div class="flex justify-end">
+    <button type="submit"
+            class="px-6 py-3 bg-emerald-700 text-white font-semibold rounded-xl shadow-sm 
+                   hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 
+                   focus:ring-emerald-500 transition">
+        Ajukan Surat
+    </button>
+</div>
         </form>
     </div>
 </div>

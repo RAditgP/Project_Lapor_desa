@@ -16,7 +16,7 @@
             <p class="text-lg md:text-xl text-gray-200 mb-6">
                 Kampung shinobi terkuat di Negara Api, pusat perdamaian dan tekad api yang abadi.
             </p>
-            <a href="#"
+            <a href="/profil"
                 class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg">
                 Jelajahi Desa
             </a>
@@ -64,7 +64,7 @@
             </div>
 
             <!-- Laporan Kegiatan 1 -->
-            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-2 transform transition duration-300">
                 <img src="images/senam.jpg"
                     alt="Laporan Kegiatan 1" class="w-full h-48 object-cover">
                 <div class="p-4">
@@ -79,7 +79,7 @@
             </div>
 
             <!-- Laporan Kegiatan 2 -->
-            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-2 transform transition duration-300">
                 <img src="images/jalan.jpg"
                     alt="Laporan Kegiatan 2" class="w-full h-48 object-cover">
                 <div class="p-4">
@@ -94,7 +94,7 @@
             </div>
 
             <!-- Laporan Kegiatan 3 -->
-            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-2 transform transition duration-300">
                 <img src="images/sembako.jpg"
                     alt="Laporan Kegiatan 3" class="w-full h-48 object-cover">
                 <div class="p-4">

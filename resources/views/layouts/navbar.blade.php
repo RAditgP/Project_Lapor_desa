@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body class="bg-emerald-900 font-sans min-h-screen flex flex-col">
+<body class="bg-white font-sans min-h-screen flex flex-col">
 
     <!-- Header -->
     <header class="flex justify-between items-center bg-emerald-900 text-white px-6 py-4 shadow-lg">

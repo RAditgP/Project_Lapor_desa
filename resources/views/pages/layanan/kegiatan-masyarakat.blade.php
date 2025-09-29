@@ -5,7 +5,7 @@
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <div class="bg-white shadow-md rounded-lg p-6">
-        <h1 class="text-3xl font-bold text-center text-emerald-700 mb-6">Laporan & Dokumentasi Kegiatan</h1>
+        <h1 class="text-3xl font-bold text-center text-emerald-700 mb-6">Dokumentasi Kegiatan masyarakat</h1>
         <p class="text-center text-gray-600 mb-8">
             Berikut adalah dokumentasi visual dari beberapa laporan masyarakat dan kegiatan desa yang telah dilaksanakan.
         </p>

@@ -3,101 +3,70 @@
 @section('title', 'Pengumuman')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="bg-white shadow-md rounded-lg p-6">
-        <h1 class="text-3xl font-bold text-center text-emerald-700 mb-6">Pengumuman Desa</h1>
-        <p class="text-center text-gray-600 mb-8">
-            Daftar pengumuman terbaru dari perangkat desa.
-        </p>
+<div class="max-w-6xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-center text-emerald-700 mb-2">Pengumuman Desa</h1>
+    <p class="text-center text-gray-500 mb-8">Daftar pengumuman terbaru dari perangkat desa.</p>
 
-        <!-- Daftar Pengumuman -->
-        <div class="space-y-8">
+    <div class="space-y-6">
+        @foreach ($pengumumans as $p)
+            <div class="bg-white p-5 rounded-lg shadow-md border hover:shadow-lg transition">
+                <div class="flex items-start gap-4">
+                    @if($p->gambar)
+                        <img src="{{ asset('storage/' . $p->gambar) }}" 
+                             alt="Gambar Pengumuman"
+                             class="w-32 h-24 object-cover rounded-md">
+                    @endif
 
-            <!-- Pengumuman 1 -->
-            <div class="bg-gray-50 rounded-lg shadow-sm p-4">
-                <p class="text-sm text-gray-500 mb-1">
-                    📅 <span class="font-semibold text-emerald-600">25 September 2025</span>
-                </p>
-                <h3 class="text-xl font-bold text-emerald-700 mb-3">
-                    Pemberitahuan Jadwal Pemilu Kepala Desa
-                </h3>
-                <img src="{{ asset('images/PEMIGE.png') }}"
-                     alt="Pemilu"
-                     class="w-full h-auto object-cover rounded-md mb-3">
-                <p class="text-gray-700 leading-relaxed">
-                    Diberitahukan kepada seluruh warga Desa Konoha, bahwa Pemilihan Kepala Desa akan dilaksanakan pada tanggal 10 Oktober 2025. Dimohon kehadirannya di tempat pemungutan suara masing-masing.
-                </p>
+                    <div class="flex-1">
+                        <p class="text-sm text-gray-500 mb-1 flex items-center gap-1">
+                            📅 {{ \Carbon\Carbon::parse($p->tanggal)->translatedFormat('d F Y') }}
+                        </p>
+                        <h2 class="text-lg font-semibold text-emerald-700">{{ $p->judul }}</h2>
+                        <p class="text-gray-600 mt-1 line-clamp-2">
+                            {{ Str::limit($p->isi, 120) }}
+                        </p>
+
+                        <!-- Tombol untuk buka modal -->
+                        <button onclick="document.getElementById('modal-{{ $p->id }}').classList.remove('hidden')"
+                                class="mt-2 text-sm text-emerald-600 font-semibold hover:underline">
+                            Lihat Detail →
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <!-- Pengumuman 2 -->
-            <div class="bg-gray-50 rounded-lg shadow-sm p-4">
-                <p class="text-sm text-gray-500 mb-1">
-                    📅 <span class="font-semibold text-emerald-600">20 September 2025</span>
-                </p>
-                <h3 class="text-xl font-bold text-emerald-700 mb-3">
-                    Sosialisasi Program Bantuan UMKM
-                </h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Kantor Desa Konoha akan mengadakan sosialisasi mengenai program bantuan modal usaha bagi UMKM. Acara akan dilaksanakan pada hari Sabtu, 28 September 2025, pukul 09.00 WIB di Balai Desa.
-                </p>
-            </div>
+            <!-- Modal -->
+            <div id="modal-{{ $p->id }}" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50">
+                <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 relative">
+                    
+                    <!-- Tombol close -->
+                    <button onclick="document.getElementById('modal-{{ $p->id }}').classList.add('hidden')"
+                            class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl">
+                        ✖
+                    </button>
 
-            <!-- Pengumuman 3 -->
-            <div class="bg-gray-50 rounded-lg shadow-sm p-4">
-                <p class="text-sm text-gray-500 mb-1">
-                    📅 <span class="font-semibold text-emerald-600">15 September 2025</span>
-                </p>
-                <h3 class="text-xl font-bold text-emerald-700 mb-3">
-                    Kerja Bakti Rutin Lingkungan
-                </h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Seluruh warga RT 01 dan RT 02 diimbau untuk mengikuti kerja bakti rutin yang akan diadakan pada hari Minggu, 22 September 2025, mulai pukul 07.00 WIB.
-                </p>
-            </div>
+                    @if($p->gambar)
+                        <img src="{{ asset('storage/' . $p->gambar) }}" 
+                             alt="Gambar Detail Pengumuman"
+                             class="w-full h-60 object-cover rounded-lg mb-4">
+                    @endif
 
-            <!-- Pengumuman 4 -->
-            <div class="bg-gray-50 rounded-lg shadow-sm p-4">
-                <p class="text-sm text-gray-500 mb-1">
-                    📅 <span class="font-semibold text-emerald-600">24 September 2025</span>
-                </p>
-                <h3 class="text-xl font-bold text-emerald-700 mb-3">
-                    Pendaftaran Akademi Ninja Dibuka!
-                </h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Waktunya para calon shinobi muda menunjukkan tekad api dalam diri! 🔥 Pendaftaran untuk angkatan baru Akademi Ninja Konoha akhirnya resmi dibuka. 
-                    Pendaftaran bisa dilakukan langsung di kantor Hokage setiap hari kerja mulai jam 08.00 sampai 15.00.
-                </p>
-            </div>
+                    <h2 class="text-2xl font-bold text-emerald-700 mb-2">{{ $p->judul }}</h2>
+                    <p class="text-sm text-gray-500 mb-4">📅 {{ \Carbon\Carbon::parse($p->tanggal)->translatedFormat('d F Y') }}</p>
+                    
+                    <div class="text-gray-700 leading-relaxed">
+                        {!! nl2br(e($p->isi)) !!}
+                    </div>
 
-            <!-- Pengumuman 5 -->
-            <div class="bg-gray-50 rounded-lg shadow-sm p-4">
-                <p class="text-sm text-gray-500 mb-1">
-                    📅 <span class="font-semibold text-emerald-600">15 Oktober 2025</span>
-                </p>
-                <h3 class="text-xl font-bold text-emerald-700 mb-3">
-                    Festival Musim Gugur Desa Konoha
-                </h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Festival Musim Gugur tahunan kembali hadir! Akan ada parade budaya shinobi, musik, makanan khas, lomba-lomba seru, hingga pesta kembang api di malam puncak. 
-                    📍 Lapangan Utama Desa Konoha.
-                </p>
+                    <div class="mt-6 text-right">
+                        <button onclick="document.getElementById('modal-{{ $p->id }}').classList.add('hidden')"
+                                class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
             </div>
-
-            <!-- Pengumuman 6 -->
-            <div class="bg-gray-50 rounded-lg shadow-sm p-4">
-                <p class="text-sm text-gray-500 mb-1">
-                    📅 <span class="font-semibold text-emerald-600">10 September 2025</span>
-                </p>
-                <h3 class="text-xl font-bold text-emerald-700 mb-3">
-                    Program Kebersihan Sungai Naka
-                </h3>
-                <p class="text-gray-700 leading-relaxed">
-                    Gotong royong kebersihan Sungai Naka akan dilaksanakan pada Minggu, 28 September 2025, mulai jam 07.00 pagi. 
-                    Titik kumpul di Jembatan Utara. Yuk tunjukkan semangat gotong royong kita! 🌊
-                </p>
-            </div>
-
-        </div>
+        @endforeach
     </div>
 </div>
 @endsection

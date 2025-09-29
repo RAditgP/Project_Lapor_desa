@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LayananSuratController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\InformasiDesaController;
+use App\Http\Controllers\PengumumanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ use App\Http\Controllers\InformasiDesaController;
 Route::view('/', 'pages.beranda')->name('beranda');
 Route::view('/pengumuman', 'pages.pengumuman')->name('pengumuman');
 Route::view('/profil', 'pages.profil')->name('profil');
+
+Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman.index');
 
 // Grup Rute untuk Layanan Online
 Route::prefix('layanan')->name('layanan.')->group(function () {

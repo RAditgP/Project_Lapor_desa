@@ -5,8 +5,9 @@
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <div class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
+        <!-- Judul -->
         <h1 class="text-3xl font-bold text-center text-emerald-700 mb-6">
-            Donasi untuk Pembangunan Desa
+            Donasi untuk Pembangunan Desa ,Dan Yang Membutuhkan.
         </h1>
         <p class="text-center text-gray-600 mb-8">
             Dukungan Anda sangat berarti bagi kemajuan desa kami. 
@@ -48,39 +49,46 @@
         <!-- Form -->
         <form action="#" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
-
             <h2 class="text-xl font-bold text-emerald-700 mb-4">Konfirmasi Donasi Anda</h2>
+
+            <!-- Pilih Nominal -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih Nominal Donasi</label>
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                    @foreach ([5000,10000,20000,50000,100000] as $nominal)
+                        <button type="button" 
+                            onclick="document.getElementById('jumlah_donasi').value={{ $nominal }}"
+                            class="py-2 px-3 bg-emerald-50 border border-emerald-500 text-emerald-700 rounded-lg font-medium hover:bg-emerald-100 transition">
+                            Rp {{ number_format($nominal,0,',','.') }}
+                        </button>
+                    @endforeach
+                </div>
+                <input type="number" id="jumlah_donasi" name="jumlah_donasi" required
+                       placeholder="Nominal lainnya"
+                       class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
+                              focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+            </div>
 
             <!-- Nama -->
             <div>
                 <label for="nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap</label>
                 <input type="text" id="nama" name="nama" required
-                       placeholder="Masukkan nama lengkap Anda"
+                       placeholder="Masukkan nama lengkap Anda / tulis 'Anonim'"
+                       class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
+                              focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                <p class="text-xs text-gray-500 mt-1">Atau ketik "Anonim" jika tidak ingin ditampilkan.</p>
+            </div>
+
+            <!-- Nomor HP -->
+            <div>
+                <label for="hp" class="block text-sm font-semibold text-gray-700 mb-2">Nomor HP / WhatsApp</label>
+                <input type="text" id="hp" name="hp" required
+                       placeholder="08xxxxxxxxxx"
                        class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
                               focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
             </div>
 
-            <!-- Jumlah Donasi -->
-            <div>
-                <label for="jumlah_donasi" class="block text-sm font-semibold text-gray-700 mb-2">Jumlah Donasi</label>
-                <input type="number" id="jumlah_donasi" name="jumlah_donasi" required
-                       placeholder="Masukkan jumlah donasi"
-                       class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
-                              focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
-            </div>
-
-            <!-- Metode Donasi -->
-            <div>
-                <label for="metode" class="block text-sm font-semibold text-gray-700 mb-2">Metode Donasi</label>
-                <select id="metode" name="metode" required
-                        class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
-                               focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
-                    <option value="">-- Pilih Metode --</option>
-                    <option value="bank">Bank Konoha</option>
-                    <option value="ewallet">E-Wallet (KonohaPay)</option>
-                    <option value="qr">QR Code</option>
-                </select>
-            </div>
+           
 
             <!-- Tanggal Transfer -->
             <div>
@@ -98,11 +106,11 @@
                               focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
             </div>
 
-            <!-- Keterangan -->
+            <!-- Pesan / Doa -->
             <div>
-                <label for="deskripsi" class="block text-sm font-semibold text-gray-700 mb-2">Keterangan (Opsional)</label>
-                <textarea id="deskripsi" name="deskripsi" rows="3"
-                          placeholder="Tuliskan keterangan tambahan jika ada"
+                <label for="pesan" class="block text-sm font-semibold text-gray-700 mb-2">Pesan / Doa (Opsional)</label>
+                <textarea id="pesan" name="pesan" rows="3"
+                          placeholder="Tuliskan doa atau pesan untuk desa"
                           class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
                                  focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></textarea>
             </div>

@@ -10,9 +10,14 @@
         <p class="text-center text-gray-600 mb-8">
             Silakan isi formulir di bawah ini untuk mengajukan permohonan surat.
         </p>
+@if(session('success'))
+    <div class="mb-4 p-4 text-green-800 bg-green-100 border border-green-300 rounded-lg">
+        {{ session('success') }}
+    </div>
+@endif
 
-        <form action="#" method="POST" class="space-y-6">
-            @csrf
+       <form action="{{ route('layanan.pengajuan-surat.store') }}" method="POST" class="space-y-6">
+        @csrf
 
             <!-- Nama Lengkap -->
 <div>
@@ -21,6 +26,9 @@
            placeholder="Masukkan nama lengkap Anda"
            class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
                   focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                  @error('nama')
+        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    @enderror
 </div>
 
 <!-- Alamat Email -->
@@ -30,6 +38,9 @@
            placeholder="Masukkan alamat email Anda"
            class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
                   focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                  @error('email')
+        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    @enderror
 </div>
 
 <!-- Jenis Surat -->
@@ -43,6 +54,9 @@
         <option value="surat_usaha">Surat Izin Usaha</option>
         <option value="surat_lainnya">Surat Keterangan Lainnya</option>
     </select>
+    @error('Jenis_surat')
+        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    @enderror
 </div>
 
 <!-- Deskripsi Permohonan -->
@@ -52,6 +66,9 @@
               placeholder="Tuliskan deskripsi permohonan Anda"
               class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm 
                      focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></textarea>
+                     @error('deskripsi')
+        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    @enderror
 </div>
 
 <!-- Tombol Submit -->

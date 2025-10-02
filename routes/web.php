@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LayananSuratController;
+use App\Http\Controllers\PengajuanSuratController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\InformasiDesaController;
 use App\Http\Controllers\PengumumanController;
@@ -30,13 +30,11 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
     Route::view('/donasi-desa', 'pages.layanan.donasi-desa')->name('donasi-desa');
     Route::view('/laporan-masyarakat', 'pages.layanan.laporan-masyarakat')->name('laporan-masyarakat');
     Route::view('/kegiatan-masyarakat', 'pages.layanan.kegiatan-masyarakat')->name('kegiatan-masyarakat');
-
+Route::get('/pengajuan-surat', [PengajuanSuratController::class, 'create'])->name('pengajuan-surat.create'); // tampilkan form (GET)
+    Route::post('/pengajuan-surat', [PengajuanSuratController::class, 'store'])->name('pengajuan-surat.store');   // simpan data (POST)
+    
     // Halaman dengan Controller
     Route::get('/informasi-desa', [InformasiDesaController::class, 'index'])->name('informasi-desa');
-
-    // Layanan Pengajuan Surat (Formulir)
-    Route::get('/pengajuan-surat', [LayananSuratController::class, 'create'])->name('pengajuan-surat.create');
-    Route::post('/pengajuan-surat', [LayananSuratController::class, 'store'])->name('pengajuan-surat.store');
 });
 
 // Halaman Pengaduan Masyarakat (Formulir)

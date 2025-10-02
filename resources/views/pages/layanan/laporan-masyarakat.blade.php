@@ -26,7 +26,7 @@
                             {{ $item->judul }}
                         </h3>
                         <p class="text-xs text-gray-500 mt-1">
-                            {{ $item->created_at->format('d M Y, H:i') }}
+                            {{ $item->created_at->locale('id')->translatedFormat('d F Y, H:i') }}
                         </p>
                     </div>
 

@@ -33,4 +33,8 @@ class PengaduanController extends Controller
         return view('pages.layanan.laporan-masyarakat', compact('laporan'));
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bd87a961005c27c3c6fb4d27d78f62069e39b0ba

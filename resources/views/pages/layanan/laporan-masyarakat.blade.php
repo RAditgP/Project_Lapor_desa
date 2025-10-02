@@ -26,7 +26,11 @@
                             {{ $item->judul }}
                         </h3>
                         <p class="text-xs text-gray-500 mt-1">
+<<<<<<< HEAD
                             {{ $item->created_at->format('d M Y, H:i') }}
+=======
+                            {{ $item->created_at->locale('id')->translatedFormat('d F Y, H:i') }}
+>>>>>>> bd87a961005c27c3c6fb4d27d78f62069e39b0ba
                         </p>
                     </div>
 

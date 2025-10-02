@@ -6,16 +6,19 @@ use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\InformasiDesaController;
 use App\Http\Controllers\PengumumanController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Semua rute aplikasi kamu didefinisikan di sini.
-| Halaman statis bisa langsung return view,
-| sedangkan yang butuh logika pakai controller.
-|
-*/
+use App\Http\Controllers\AuthController;
+
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
 
 // Halaman Beranda dan Pengumuman (Statis)
 Route::view('/', 'pages.beranda')->name('beranda');
@@ -37,7 +40,7 @@ Route::get('/pengajuan-surat', [PengajuanSuratController::class, 'create'])->nam
     Route::get('/informasi-desa', [InformasiDesaController::class, 'index'])->name('informasi-desa');
 });
 
-// Halaman Pengaduan Masyarakat (Formulir)
+
 Route::get('/pengaduan', [PengaduanController::class, 'create'])->name('pengaduan.create');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
 Route::get('/laporan', [PengaduanController::class, 'laporan'])->name('laporan.index');

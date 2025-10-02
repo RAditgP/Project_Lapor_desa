@@ -11,3 +11,4 @@ class Pengaduan extends Model
         'nama', 'nik', 'telepon', 'judul', 'isi'
     ];
 }
+

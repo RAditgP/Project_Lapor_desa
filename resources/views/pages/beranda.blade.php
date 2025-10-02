@@ -65,7 +65,7 @@
 
             <!-- Laporan Kegiatan 1 -->
             <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-2 transform transition duration-300">
-                <img src="images/senam.jpg"
+                <img src="images/pengumuman/senam.jpg"
                     alt="Laporan Kegiatan 1" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="text-xl font-bold text-emerald-700 mb-2">
@@ -80,7 +80,7 @@
 
             <!-- Laporan Kegiatan 2 -->
             <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-2 transform transition duration-300">
-                <img src="images/jalan.jpg"
+                <img src="images/pengumuman/jalan.jpg"
                     alt="Laporan Kegiatan 2" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="text-xl font-bold text-emerald-700 mb-2">
@@ -95,7 +95,7 @@
 
             <!-- Laporan Kegiatan 3 -->
             <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-2 transform transition duration-300">
-                <img src="images/sembako.jpg"
+                <img src="images/pengumuman/sembako.jpg"
                     alt="Laporan Kegiatan 3" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="text-xl font-bold text-emerald-700 mb-2">

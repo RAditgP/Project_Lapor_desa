@@ -6,16 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
-    {
-        Schema::create('pengaduans', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama', 100);
-            $table->string('nik', 16);
-            $table->text('isi_pengaduan');
-            $table->timestamps();
-        });
-    }
+   public function up(): void
+{
+    Schema::create('pengaduans', function (Blueprint $table) {
+        $table->id();
+        $table->string('nama');
+        $table->string('nik');
+        $table->string('telepon');
+        $table->string('judul');
+        $table->text('isi');
+        $table->timestamps();
+    });
+}
+
 
     public function down()
     {

@@ -15,7 +15,7 @@
 
             <!-- Contoh Laporan 1 -->
 <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-    <img src="{{ asset('images/senam.jpg') }}" 
+    <img src="{{ asset('images/pengumuman/senam.jpg') }}" 
          alt="Laporan Kegiatan 1" 
          class="w-full h-48 object-cover">
     <div class="p-4">
@@ -29,7 +29,7 @@
 
 <!-- Contoh Laporan 2 -->
 <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-    <img src="{{ asset('images/jalan.jpg') }}" 
+    <img src="{{ asset('images/pengumuman/jalan.jpg') }}" 
          alt="Laporan Kegiatan 2" 
          class="w-full h-48 object-cover">
     <div class="p-4">
@@ -43,7 +43,7 @@
 
 <!-- Contoh Laporan 3 -->
 <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-    <img src="{{ asset('images/sembako.jpg') }}" 
+    <img src="{{ asset('images/pengumuman/sembako.jpg') }}" 
          alt="Laporan Kegiatan 3" 
          class="w-full h-48 object-cover">
     <div class="p-4">

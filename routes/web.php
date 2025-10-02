@@ -42,3 +42,6 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
 // Halaman Pengaduan Masyarakat (Formulir)
 Route::get('/pengaduan', [PengaduanController::class, 'create'])->name('pengaduan.create');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+Route::get('/laporan', [PengaduanController::class, 'laporan'])->name('laporan.index');
+Route::get('/layanan/laporan-masyarakat', [PengaduanController::class, 'laporan']);
+

@@ -9,10 +9,16 @@ class PengumumanController extends Controller
 {
     public function index()
     {
-        // Ambil semua data pengumuman dari database
-        $pengumumans = Pengumuman::orderBy('tanggal', 'desc')->get();
+        // Ambil semua data pengumuman, diurutkan terbaru untuk user
+        $pengumumans = Pengumuman::orderBy('tanggal', 'desc')->get(); 
 
-        // Kirim ke view
-        return view('pages.pengumuman', compact('pengumumans'));
+        // Mengirim ke view user: /pengumuman
+        return view('pages.pengumuman', compact('pengumumans')); 
+    }
+    
+    // Tambahkan fungsi untuk menampilkan detail satu pengumuman
+    public function show(Pengumuman $pengumuman)
+    {
+        return view('pages.pengumuman_detail', compact('pengumuman'));
     }
 }

@@ -11,10 +11,7 @@
     <!-- Header -->
     <header class="flex justify-between items-center bg-emerald-900 text-white px-6 py-4 shadow-lg">
         <div class="font-extrabold text-2xl tracking-wide text-yellow-400">LAPOR DESA</div>
-        <div class="hidden sm:block">
-            <input type="text" placeholder="Search..."
-                   class="px-3 py-1 rounded border border-emerald-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-black">
-        </div>
+       
         <!-- Tombol hamburger -->
         <button @click="open = !open" class="sm:hidden text-yellow-400 focus:outline-none text-2xl">
             ☰

@@ -1,103 +1,129 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" x-data="{ open: false, layanan: false }">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Lapor Desa')</title>
     @vite('resources/css/app.css')
-    <style>
-        /* Reset bawaan browser */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            height: 100%;
-        }
-    </style>
 </head>
 <body class="bg-white font-sans min-h-screen flex flex-col">
 
     <!-- Header -->
     <header class="flex justify-between items-center bg-emerald-900 text-white px-6 py-4 shadow-lg">
         <div class="font-extrabold text-2xl tracking-wide text-yellow-400">LAPOR DESA</div>
-        <div>
+        <div class="hidden sm:block">
             <input type="text" placeholder="Search..."
                    class="px-3 py-1 rounded border border-emerald-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-black">
         </div>
+        <!-- Tombol hamburger -->
+        <button @click="open = !open" class="sm:hidden text-yellow-400 focus:outline-none text-2xl">
+            ☰
+        </button>
     </header>
 
     <!-- Navbar -->
-    <!-- Navbar -->
-<nav class="bg-emerald-800 text-white flex justify-center py-3 shadow-md z-50 sticky top-0 w-full">
-    <ul class="flex space-x-8 items-center">
-        <li><a href="{{ url('/') }}" class="hover:text-yellow-400 font-medium">Beranda</a></li>
-        <li><a href="{{ url('/pengumuman') }}" class="hover:text-yellow-400 font-medium">Pengumuman</a></li>
+    <nav class="bg-emerald-800 text-white shadow-md z-50 sticky top-0 w-full">
+        <!-- Menu Desktop -->
+        <ul class="hidden sm:flex justify-center space-x-8 items-center py-3">
+            <li><a href="{{ url('/') }}" class="hover:text-yellow-400 font-medium">Beranda</a></li>
+            <li><a href="{{ url('/pengumuman') }}" class="hover:text-yellow-400 font-medium">Pengumuman</a></li>
 
-        <!-- Dropdown -->
-        <li class="relative group">
-            <a href="#" class="hover:text-yellow-400 font-medium flex items-center">
-                Layanan Online
-                <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-300"
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-            </a>
-            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white text-black rounded-lg shadow-lg invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50 transition-all duration-300 ease-in-out">
-                <a href="{{ url('/layanan/pengajuan-surat') }}" class="block px-4 py-2 hover:bg-gray-100">Pengajuan Surat</a>
-                <a href="{{ url('/layanan/laporan-masyarakat') }}" class="block px-4 py-2 hover:bg-gray-100">Laporan Masyarakat</a>
-                <a href="{{ url('/layanan/kegiatan-masyarakat') }}" class="block px-4 py-2 hover:bg-gray-100">Kegiatan Masyarakat</a>
-                <a href="{{ url('/layanan/informasi-desa') }}" class="block px-4 py-2 hover:bg-gray-100">Informasi Data Desa</a>
-                <a href="{{ url('/layanan/donasi-desa') }}" class="block px-4 py-2 hover:bg-gray-100">Donasi Desa</a>
-            </div>
-        </li>
-
-        <li><a href="{{ url('/pengaduan') }}" class="hover:text-yellow-400 font-medium">Pengaduan</a></li>
-        <li><a href="{{ url('/profil') }}" class="hover:text-yellow-400 font-medium">Profil</a></li>
-
-        <!-- Tambahan Login/Logout -->
-        @auth
-            @if(auth()->user()->role === 'admin')
-                <li><a href="{{ route('admin.dashboard') }}" class="hover:text-yellow-400 font-medium">Admin</a></li>
-            @endif
-            <li>
-                <form action="{{ route('logout') }}" method="POST" class="inline">
-                    @csrf
-                    <button type="submit" class="hover:text-yellow-400 font-medium">Logout</button>
-                </form>
+            <!-- Dropdown desktop -->
+            <li class="relative group">
+                <a href="#" class="hover:text-yellow-400 font-medium flex items-center">
+                    Layanan Online
+                    <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-300"
+                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </a>
+                <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white text-black rounded-lg shadow-lg invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50 transition-all duration-300 ease-in-out">
+                    <a href="{{ url('/layanan/pengajuan-surat') }}" class="block px-4 py-2 hover:bg-gray-100">Pengajuan Surat</a>
+                    <a href="{{ url('/layanan/laporan-masyarakat') }}" class="block px-4 py-2 hover:bg-gray-100">Laporan Masyarakat</a>
+                    <a href="{{ url('/layanan/kegiatan-masyarakat') }}" class="block px-4 py-2 hover:bg-gray-100">Kegiatan Masyarakat</a>
+                    <a href="{{ url('/layanan/informasi-desa') }}" class="block px-4 py-2 hover:bg-gray-100">Informasi Data Desa</a>
+                    <a href="{{ url('/layanan/donasi-desa') }}" class="block px-4 py-2 hover:bg-gray-100">Donasi Desa</a>
+                </div>
             </li>
-        @else
-            <li><a href="{{ route('login') }}" class="hover:text-yellow-400 font-medium">Login</a></li>
-        @endauth
-    </ul>
-</nav>
 
+            <li><a href="{{ url('/pengaduan') }}" class="hover:text-yellow-400 font-medium">Pengaduan</a></li>
+            <li><a href="{{ url('/profil') }}" class="hover:text-yellow-400 font-medium">Profil</a></li>
+
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <li><a href="{{ route('admin.dashboard') }}" class="hover:text-yellow-400 font-medium">Admin</a></li>
+                @endif
+                <li>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="hover:text-yellow-400 font-medium">Logout</button>
+                    </form>
+                </li>
+            @else
+                <li><a href="{{ route('login') }}" class="hover:text-yellow-400 font-medium">Login</a></li>
+            @endauth
+        </ul>
+
+        <!-- Menu Mobile -->
+        <div x-show="open" x-transition class="sm:hidden bg-emerald-700 text-white flex flex-col py-3 px-6 space-y-2">
+            <a href="{{ url('/') }}" class="hover:text-yellow-400">Beranda</a>
+            <a href="{{ url('/pengumuman') }}" class="hover:text-yellow-400">Pengumuman</a>
+
+            <!-- Dropdown mobile -->
+            <div x-data="{ openSub: false }">
+                <button @click="openSub = !openSub" class="flex items-center justify-between w-full hover:text-yellow-400">
+                    <span>Layanan Online</span>
+                    <svg class="w-4 h-4 transform transition-transform duration-300"
+                         :class="{ 'rotate-180': openSub }"
+                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div x-show="openSub" x-transition class="pl-4 mt-2 flex flex-col space-y-1 text-sm">
+                    <a href="{{ url('/layanan/pengajuan-surat') }}" class="hover:text-yellow-400">Pengajuan Surat</a>
+                    <a href="{{ url('/layanan/laporan-masyarakat') }}" class="hover:text-yellow-400">Laporan Masyarakat</a>
+                    <a href="{{ url('/layanan/kegiatan-masyarakat') }}" class="hover:text-yellow-400">Kegiatan Masyarakat</a>
+                    <a href="{{ url('/layanan/informasi-desa') }}" class="hover:text-yellow-400">Informasi Data Desa</a>
+                    <a href="{{ url('/layanan/donasi-desa') }}" class="hover:text-yellow-400">Donasi Desa</a>
+                </div>
+            </div>
+
+            <a href="{{ url('/pengaduan') }}" class="hover:text-yellow-400">Pengaduan</a>
+            <a href="{{ url('/profil') }}" class="hover:text-yellow-400">Profil</a>
+
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.dashboard') }}" class="hover:text-yellow-400">Admin</a>
+                @endif
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="hover:text-yellow-400">Logout</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="hover:text-yellow-400">Login</a>
+            @endauth
+        </div>
+    </nav>
 
     <!-- Konten -->
-    <!-- Konten -->
-<main class="flex-grow">
-    @yield('content')
-</main>
-
+    <main class="flex-grow">
+        @yield('content')
+    </main>
 
     <!-- Footer -->
     <footer class="bg-emerald-900 text-white py-8 shadow-inner">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-            <!-- Logo -->
             <div class="flex flex-col items-center md:items-start">
                 <h2 class="text-lg font-bold text-yellow-400 mb-2">LAPOR DESA</h2>
                 <img src="{{ asset('images/konoha.merah.jpg') }}" alt="Logo Desa" class="w-20 h-20">
                 <p class="text-sm text-gray-300 mb-3">Layanan Aspirasi & Pengaduan Masyarakat Desa</p>
             </div>
-            <!-- Kontak -->
             <div class="text-center md:text-left">
                 <h3 class="text-yellow-400 font-semibold mb-2">Kontak</h3>
                 <p><span class="font-semibold">Alamat:</span> Jl. Raya Desa No.123, Salatiga</p>
                 <p><span class="font-semibold">Telepon:</span> +62 812 3456 7890</p>
                 <p><span class="font-semibold">Email:</span> lapordesa@example.com</p>
             </div>
-            <!-- Hak Cipta -->
             <div class="text-center md:text-right">
                 <p>&copy; {{ date('Y') }} <span class="text-yellow-400">Lapor Desa</span>.</p>
                 <p class="text-sm text-gray-300">Semua Hak Dilindungi.</p>
@@ -105,5 +131,7 @@
         </div>
     </footer>
 
+    <!-- Alpine.js -->
+    <script src="//unpkg.com/alpinejs" defer></script>
 </body>
 </html>

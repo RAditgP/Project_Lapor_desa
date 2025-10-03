@@ -37,7 +37,6 @@
                         </p>
                         <div class="text-xs bg-gray-50 rounded-lg p-4 border border-gray-100 space-y-1">
                             <p><span class="font-semibold text-gray-700">Nama:</span> {{ $item->nama }}</p>
-                            <p><span class="font-semibold text-gray-700">NIK:</span> {{ $item->nik }}</p>
                             <p><span class="font-semibold text-gray-700">Telp:</span> {{ $item->telepon }}</p>
                         </div>
                     </div>

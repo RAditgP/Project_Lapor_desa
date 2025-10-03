@@ -16,7 +16,6 @@ class PengaduanController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nik' => 'required',
             'telepon' => 'required',
             'judul' => 'required',
             'isi' => 'required'

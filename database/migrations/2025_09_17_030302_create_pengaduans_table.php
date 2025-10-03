@@ -11,7 +11,6 @@ return new class extends Migration
     Schema::create('pengaduans', function (Blueprint $table) {
         $table->id();
         $table->string('nama');
-        $table->string('nik');
         $table->string('telepon');
         $table->string('judul');
         $table->text('isi');

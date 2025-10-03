@@ -25,12 +25,7 @@
             </div>
 
             <!-- NIK -->
-            <div>
-                <label for="nik" class="block text-sm font-semibold text-gray-700 mb-2">NIK</label>
-                <input type="text" name="nik" id="nik" required
-                    placeholder="Masukkan NIK Anda"
-                    class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
-            </div>
+            
 
             <!-- Nomor Telepon -->
             <div>

@@ -83,7 +83,8 @@
 </section>
 
 <!-- Galeri Hokage dengan Modal -->
-<section class="py-20 bg-gradient-to-b from-gray-50 to-white" x-data="{show:false,nama:'',ket:''}">
+<section class="py-20 bg-gradient-to-b from-gray-50 to-white" 
+         x-data="{show:false,nama:'',ket:'',img:''}">
     <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-extrabold text-center text-gray-800 mb-12 tracking-wide">
             Galeri Hokage
@@ -103,7 +104,7 @@
 
             @foreach ($hokage as $h)
                 <div class="min-w-[240px] snap-center group cursor-pointer"
-                     @click="nama='{{ $h['nama'] }}';ket='{{ $h['ket'] }}';show=true">
+                     @click="nama='{{ $h['nama'] }}';ket='{{ $h['ket'] }}';img='{{ asset($h['img']) }}';show=true">
                     <div class="relative rounded-2xl overflow-hidden shadow-xl transition-transform duration-500 group-hover:scale-105">
                         <img src="{{ asset($h['img']) }}" alt="{{ $h['nama'] }}" class="w-full h-80 object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent 
@@ -118,29 +119,39 @@
     </div>
 
     <!-- Modal -->
-    <div x-show="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-         x-transition>
-        <div class="bg-white rounded-2xl shadow-lg max-w-lg w-full p-6 relative">
-            <button class="absolute top-3 right-3 text-gray-500 hover:text-black" @click="show=false">✖</button>
-            <h2 class="text-2xl font-bold mb-2" x-text="nama"></h2>
+<div x-show="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+     x-transition>
+    <div class="bg-white rounded-2xl shadow-lg max-w-4xl w-full p-6 relative grid md:grid-cols-2 gap-6">
+        <!-- Tombol close -->
+        <button class="absolute top-3 right-3 text-gray-500 hover:text-black" @click="show=false">✖</button>
+
+        <!-- Foto Hokage (kiri) -->
+        <div>
+            <img :src="img" alt="Foto Hokage" class="w-full h-80 object-cover rounded-xl shadow-md">
+        </div>
+
+        <!-- Biodata Hokage (kanan) -->
+        <div class="flex flex-col justify-center">
+            <h2 class="text-3xl font-bold mb-2" x-text="nama"></h2>
             <p class="text-gray-700 mb-4" x-text="ket"></p>
 
-            <h3 class="font-semibold">Tentang Desa</h3>
+            <h3 class="font-semibold text-lg mb-1">Tentang Desa</h3>
             <p class="text-sm mb-3">
                 Desa Konoha berdiri atas dasar perdamaian antara klan Senju dan Uchiha, tumbuh menjadi desa shinobi terkuat.
             </p>
 
-            <h3 class="font-semibold">Visi, Misi & Tujuan</h3>
+            <h3 class="font-semibold text-lg mb-1">Visi, Misi & Tujuan</h3>
             <p class="text-sm mb-3">
                 Visi: Desa shinobi damai & makmur.  
                 Misi: Melindungi warga, mendidik generasi, menjaga hubungan desa.  
-                Tujuan: Mewujudkan dunia shinobi damai & sejahtera.
+                Tujuan: Dunia shinobi damai & sejahtera.
             </p>
 
-            <h3 class="font-semibold">Kontak & Lokasi</h3>
+            <h3 class="font-semibold text-lg mb-1">Kontak & Lokasi</h3>
             <p class="text-sm">Alamat: Desa Konoha, Negara Api</p>
         </div>
     </div>
+</div>
 </section>
 
 <!-- Kontak & Lokasi -->

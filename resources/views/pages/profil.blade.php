@@ -119,8 +119,9 @@
     </div>
 
     <!-- Modal -->
-<div x-show="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-     x-transition>
+<div x-show="show" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50" x-transition>
+   <div x-show="show" x-transition.scale.origin.center>
+
     <div class="bg-white rounded-2xl shadow-lg max-w-4xl w-full p-6 relative grid md:grid-cols-2 gap-6">
         <!-- Tombol close -->
         <button class="absolute top-3 right-3 text-gray-500 hover:text-black" @click="show=false">✖</button>
@@ -151,6 +152,7 @@
             <p class="text-sm">Alamat: Desa Konoha, Negara Api</p>
         </div>
     </div>
+    
 </div>
 </section>
 

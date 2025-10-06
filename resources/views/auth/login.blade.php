@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
+        /* --- 1. Setup dan Gambar Background --- */
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
@@ -18,6 +19,7 @@
             min-height: 100vh;
             color: #333;
             position: relative;
+
             background-image: url('images/konoha_hd.jpg');
             background-size: cover;
             background-position: center;
@@ -25,6 +27,7 @@
             z-index: 0;
         }
 
+        /* --- 2. Overlay Gelap untuk Keterbacaan --- */
         body::before {
             content: '';
             position: absolute;
@@ -36,10 +39,11 @@
             z-index: -1;
         }
 
+        /* --- 3. Kontainer Kartu Login --- */
         .login-card {
-            position: relative;
+            position: relative; /* biar ikon bisa diatur posisinya di dalam */
             background-color: #ffffff;
-            padding: 40px 45px;
+            padding: 50px 45px 40px 45px;
             border-radius: 12px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             width: 360px;
@@ -52,19 +56,12 @@
             transform: translateY(-5px);
         }
 
+        /* --- 4. Judul, Input, dan Tombol --- */
         .login-title {
             color: #006f20;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             font-size: 30px;
             font-weight: 700;
-        }
-
-        .login-logo {
-            max-width: 120px;
-            height: auto;
-            margin-bottom: 30px;
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .input-group {
@@ -76,6 +73,7 @@
             padding: 14px 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
+            box-sizing: border-box;
             font-size: 16px;
             transition: all 0.3s;
         }
@@ -109,7 +107,16 @@
             transform: scale(0.99);
         }
 
-        /* Ikon kembali di dalam kartu */
+        /* --- 5. Logo di dalam Kartu --- */
+        .login-logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 25px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- 6. Ikon Kembali di Dalam Kartu --- */
         .icon-back {
             position: absolute;
             top: 15px;
@@ -127,15 +134,32 @@
         }
 
         .icon-back svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             fill: #333;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                width: 90%;
+                padding: 40px 25px;
+            }
+
+            .icon-back {
+                top: 10px;
+                left: 10px;
+                padding: 6px;
+            }
+
+            .icon-back svg {
+                width: 18px;
+                height: 18px;
+            }
         }
     </style>
 </head>
 
 <body>
-
     <div class="login-card">
         <!-- Ikon kembali di pojok kiri atas dalam kartu -->
         <a href="{{ url('/') }}" class="icon-back" title="Kembali ke Beranda">
@@ -146,7 +170,6 @@
         </a>
 
         <img src="images/konoha.merah.jpg" alt="Logo Admin" class="login-logo">
-
         <h1 class="login-title">Login Admin</h1>
 
         <form action="{{ route('login') }}" method="POST" class="login-form">
@@ -154,15 +177,12 @@
             <div class="input-group">
                 <input type="email" name="email" placeholder="Email" required autofocus>
             </div>
-
             <div class="input-group">
                 <input type="password" name="password" placeholder="Password" required>
             </div>
-
             <button type="submit" class="login-button">MASUK</button>
         </form>
     </div>
-
 </body>
 
 </html>

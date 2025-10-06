@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. Setup dan Gambar Background --- */
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
@@ -19,20 +18,13 @@
             min-height: 100vh;
             color: #333;
             position: relative;
-            /* Diperlukan untuk overlay */
-
-            /* GANTI URL INI DENGAN URL GAMBAR ANDA */
             background-image: url('images/konoha_hd.jpg');
-
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             z-index: 0;
-            /* Pastikan body di bawah overlay */
         }
 
-        /* --- 2. Overlay Gelap untuk Keterbacaan --- */
-        /* Pseudo-element untuk membuat lapisan gelap di atas gambar background */
         body::before {
             content: '';
             position: absolute;
@@ -41,13 +33,11 @@
             right: 0;
             bottom: 0;
             background-color: rgba(0, 0, 0, 0.4);
-            /* Hitam transparan 40% */
             z-index: -1;
-            /* Pastikan di bawah form login */
         }
 
-        /* --- 3. Kontainer Kartu Login (Card) --- */
         .login-card {
+            position: relative;
             background-color: #ffffff;
             padding: 40px 45px;
             border-radius: 12px;
@@ -56,19 +46,25 @@
             text-align: center;
             transition: transform 0.3s ease-in-out;
             z-index: 1;
-            /* Pastikan form di atas overlay */
         }
 
         .login-card:hover {
             transform: translateY(-5px);
         }
 
-        /* --- 4. Judul, Input, dan Tombol (sama seperti sebelumnya) --- */
         .login-title {
-            color: #006f20ff;
+            color: #006f20;
             margin-bottom: 35px;
             font-size: 30px;
             font-weight: 700;
+        }
+
+        .login-logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 30px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .input-group {
@@ -80,7 +76,6 @@
             padding: 14px 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            box-sizing: border-box;
             font-size: 16px;
             transition: all 0.3s;
         }
@@ -106,17 +101,6 @@
             margin-top: 10px;
         }
 
-        /* --- 4. Logo di dalam Kotak Login --- */
-        .login-logo {
-            max-width: 120px;
-            /* GANTI NILAI INI */
-            height: auto;
-            margin-bottom: 30px;
-            /* DAN SESUAIKAN JARAK INI */
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
         .login-button:hover {
             background-color: #45a049;
         }
@@ -124,19 +108,49 @@
         .login-button:active {
             transform: scale(0.99);
         }
+
+        /* Ikon kembali di dalam kartu */
+        .icon-back {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(240, 240, 240, 0.9);
+            border-radius: 50%;
+            padding: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .icon-back:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.1);
+        }
+
+        .icon-back svg {
+            width: 20px;
+            height: 20px;
+            fill: #333;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="login-card">
+        <!-- Ikon kembali di pojok kiri atas dalam kartu -->
+        <a href="{{ url('/') }}" class="icon-back" title="Kembali ke Beranda">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                    d="M10 17l1.41-1.41L8.83 13H21v-2H8.83l2.58-2.59L10 7l-5 5 5 5zm9 4H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v4h-2V5H5v14h14v-4h2v4a2 2 0 01-2 2z" />
+            </svg>
+        </a>
+
         <img src="images/konoha.merah.jpg" alt="Logo Admin" class="login-logo">
 
         <h1 class="login-title">Login Admin</h1>
 
         <form action="{{ route('login') }}" method="POST" class="login-form">
             @csrf
-
             <div class="input-group">
                 <input type="email" name="email" placeholder="Email" required autofocus>
             </div>

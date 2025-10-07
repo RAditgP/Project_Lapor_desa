@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. Setup dan Gambar Background --- */
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
@@ -19,15 +18,13 @@
             min-height: 100vh;
             color: #333;
             position: relative;
-
-            background-image: url('images/konoha_hd.jpg');
+            background-image: url('{{ asset('images/konoha_hd.jpg') }}');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             z-index: 0;
         }
 
-        /* --- 2. Overlay Gelap untuk Keterbacaan --- */
         body::before {
             content: '';
             position: absolute;
@@ -39,9 +36,8 @@
             z-index: -1;
         }
 
-        /* --- 3. Kontainer Kartu Login --- */
         .login-card {
-            position: relative; /* biar ikon bisa diatur posisinya di dalam */
+            position: relative;
             background-color: #ffffff;
             padding: 50px 45px 40px 45px;
             border-radius: 12px;
@@ -56,7 +52,6 @@
             transform: translateY(-5px);
         }
 
-        /* --- 4. Judul, Input, dan Tombol --- */
         .login-title {
             color: #006f20;
             margin-bottom: 25px;
@@ -107,7 +102,6 @@
             transform: scale(0.99);
         }
 
-        /* --- 5. Logo di dalam Kartu --- */
         .login-logo {
             max-width: 120px;
             height: auto;
@@ -116,7 +110,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- 6. Ikon Kembali di Dalam Kartu --- */
         .icon-back {
             position: absolute;
             top: 15px;
@@ -161,18 +154,16 @@
 
 <body>
     <div class="login-card">
-        <!-- Ikon kembali di pojok kiri atas dalam kartu -->
         <a href="{{ url('/') }}" class="icon-back" title="Kembali ke Beranda">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                    d="M10 17l1.41-1.41L8.83 13H21v-2H8.83l2.58-2.59L10 7l-5 5 5 5zm9 4H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v4h-2V5H5v14h14v-4h2v4a2 2 0 01-2 2z" />
+                <path d="M10 17l1.41-1.41L8.83 13H21v-2H8.83l2.58-2.59L10 7l-5 5 5 5zm9 4H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v4h-2V5H5v14h14v-4h2v4a2 2 0 01-2 2z"/>
             </svg>
         </a>
 
-        <img src="images/konoha.merah.jpg" alt="Logo Admin" class="login-logo">
+        <img src="{{ asset('images/konoha.merah.jpg') }}" alt="Logo Admin" class="login-logo">
         <h1 class="login-title">Login Admin</h1>
 
-        <form action="{{ route('login') }}" method="POST" class="login-form">
+        <form action="{{ route('login.post') }}" method="POST" class="login-form">
             @csrf
             <div class="input-group">
                 <input type="email" name="email" placeholder="Email" required autofocus>
@@ -184,5 +175,4 @@
         </form>
     </div>
 </body>
-
 </html>

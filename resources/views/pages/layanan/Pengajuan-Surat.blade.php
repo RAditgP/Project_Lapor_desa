@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <form action="{{ route('pengajuan-surat.store') }}" method="POST">
+    <form action="{{ route('layanan.pengajuan-surat.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label class="block font-semibold">Nama Lengkap</label>

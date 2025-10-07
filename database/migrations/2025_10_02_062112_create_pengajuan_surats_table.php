@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
- public function up(): void
+ public function up()
 {
     Schema::create('pengajuan_surats', function (Blueprint $table) {
         $table->id();
@@ -17,10 +17,10 @@ return new class extends Migration
         $table->string('nik');
         $table->string('jenis_surat');
         $table->text('keperluan');
-        $table->string('status')->default('Menunggu');
         $table->timestamps();
     });
 }
+
 
 
 

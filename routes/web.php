@@ -64,8 +64,8 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
     Route::view('/donasi-desa', 'pages.layanan.donasi-desa')->name('donasi-desa');
     Route::view('/kegiatan-masyarakat', 'pages.layanan.kegiatan-masyarakat')->name('kegiatan-masyarakat');
 
-    Route::get('/layanan/pengajuan-surat', [PengajuanSuratController::class, 'create'])->name('pengajuan-surat.create');
-    Route::post('/layanan/pengajuan-surat', [PengajuanSuratController::class, 'store'])->name('pengajuan-surat.store');
+    Route::get('/pengajuan-surat', [PengajuanSuratController::class, 'create'])->name('pengajuan-surat.create');
+    Route::post('/pengajuan-surat', [PengajuanSuratController::class, 'store'])->name('pengajuan-surat.store');
     Route::get('/informasi-desa', [InformasiDesaController::class, 'index'])->name('informasi-desa');
     Route::get('/laporan-masyarakat', [PengaduanController::class, 'laporan'])->name('laporan-masyarakat');
 });

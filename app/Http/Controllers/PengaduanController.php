@@ -13,18 +13,26 @@ class PengaduanController extends Controller
 }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'telepon' => 'required',
-            'judul' => 'required',
-            'isi' => 'required'
-        ]);
+{
+    $validated = $request->validate([
+        'nama' => 'required|string|max:255',
+        'telepon' => 'required|string|max:20',
+        'judul' => 'required|string|max:255',
+        'isi' => 'required|string',
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
 
-        Pengaduan::create($request->all());
-
-        return redirect('/laporan')->with('success', 'Pengaduan berhasil dikirim!');
+    // Jika user upload foto
+    if ($request->hasFile('foto')) {
+        // Simpan ke folder storage/app/public/pengaduan/
+        $validated['foto'] = $request->file('foto')->store('pengaduan', 'public');
     }
+
+    Pengaduan::create($validated);
+
+    return redirect('/laporan')->with('success', 'Pengaduan berhasil dikirim!');
+}
+
 
     public function laporan()
     {

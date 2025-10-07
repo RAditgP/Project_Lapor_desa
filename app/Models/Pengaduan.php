@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengaduan extends Model
 {
-    protected $table = 'pengaduan';
+    protected $table = 'pengaduans';
     protected $fillable = [
-        'nama', 'nik', 'telepon', 'judul', 'isi'
+        'nama', 'nik', 'telepon', 'judul', 'isi','foto'
     ];
 }
 

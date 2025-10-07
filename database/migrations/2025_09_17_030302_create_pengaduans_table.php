@@ -14,6 +14,7 @@ return new class extends Migration
         $table->string('telepon');
         $table->string('judul');
         $table->text('isi');
+        $table->string('foto')->nullable(); // <--- tambahkan kolom ini
         $table->timestamps();
     });
 }

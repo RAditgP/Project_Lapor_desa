@@ -20,6 +20,17 @@
           class="relative group bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md 
                  hover:shadow-2xl hover:border-emerald-300 transition-all duration-300 transform hover:-translate-y-2"
         >
+          <!-- FOTO -->
+          @if(!empty($item->foto))
+            <img src="{{ asset('public/storage/pengaduan/' . $item->foto) }}"
+                 alt="Foto Laporan"
+                 class="w-full h-48 object-cover">
+          @else
+            <img src="{{ asset('images/no-image.jpg') }}" 
+                 alt="Tidak ada foto"
+                 class="w-full h-48 object-cover opacity-70">
+          @endif
+
           <!-- HEADER HIJAU -->
           <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white p-5">
             <h3 class="text-lg font-extrabold uppercase tracking-wide leading-snug">
@@ -52,7 +63,7 @@
 
               <!-- TOMBOL DETAIL -->
               <button
-                onclick="showDetail('{{ addslashes($item->judul) }}', '{{ addslashes($item->nama) }}', '{{ addslashes($item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-') }}', '{{ addslashes($item->isi) }}')"
+                onclick="showDetail('{{ addslashes($item->judul) }}', '{{ addslashes($item->nama) }}', '{{ addslashes($item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-') }}', '{{ addslashes($item->isi) }}', '{{ asset('storage/laporan/' . $item->foto) }}')"
                 class="px-4 py-2 text-sm font-semibold bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200 transition-all duration-200 flex items-center gap-1"
               >
                 Detail
@@ -83,6 +94,9 @@
     <h2 id="modalJudul" class="text-2xl font-extrabold text-emerald-700 uppercase mb-2 tracking-wide"></h2>
     <p id="modalTanggal" class="text-sm text-gray-500 mb-3"></p>
     <p id="modalNama" class="font-semibold text-gray-700 mb-3"></p>
+    <div id="modalFotoContainer" class="my-4 hidden">
+      <img id="modalFoto" src="" alt="Foto Laporan" class="rounded-lg w-full object-cover max-h-80 shadow-md">
+    </div>
     <div class="border-t border-gray-200 my-4"></div>
     <p id="modalIsi" class="text-gray-700 leading-relaxed text-sm whitespace-pre-line"></p>
   </div>
@@ -90,11 +104,22 @@
 
 <!-- SCRIPT MODAL -->
 <script>
-  function showDetail(judul, nama, tanggal, isi) {
+  function showDetail(judul, nama, tanggal, isi, fotoUrl) {
     document.getElementById('modalJudul').innerText = judul;
     document.getElementById('modalNama').innerText = '👤 ' + nama;
     document.getElementById('modalTanggal').innerText = tanggal;
     document.getElementById('modalIsi').innerText = isi;
+
+    const fotoContainer = document.getElementById('modalFotoContainer');
+    const modalFoto = document.getElementById('modalFoto');
+
+    if (fotoUrl && !fotoUrl.includes('no-image')) {
+      modalFoto.src = fotoUrl;
+      fotoContainer.classList.remove('hidden');
+    } else {
+      fotoContainer.classList.add('hidden');
+    }
+
     document.getElementById('detailModal').classList.remove('hidden');
   }
 

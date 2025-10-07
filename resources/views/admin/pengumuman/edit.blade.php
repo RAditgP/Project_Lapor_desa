@@ -1,57 +1,54 @@
-@extends('admin.layouts.navbar')
+@extends('layouts.admin')
+
+@section('title', 'Edit Pengumuman')
 
 @section('content')
-<div class="container">
-    <h2>Edit Pengumuman: {{ $pengumuman->judul }}</h2>
-    <a href="{{ route('admin.pengumuman.index') }}" class="btn btn-secondary mb-3">← Kembali</a>
+<div class="p-6 bg-white rounded-lg shadow-md max-w-2xl mx-auto">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Edit Pengumuman</h1>
 
-    {{-- Form menggunakan method POST dengan simulasi PUT, dan route 'admin.pengumuman.update' --}}
-    <form action="{{ route('admin.pengumuman.update', $pengumuman) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.pengumuman.update', $pengumuman->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        
-        <div class="mb-3">
-            <label for="judul" class="form-label">Judul Pengumuman</label>
-            {{-- Mengisi input dengan data lama: $pengumuman->judul --}}
-            <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $pengumuman->judul) }}" required>
-            @error('judul')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+
+        <div class="mb-4">
+            <label class="block font-semibold mb-1">Judul</label>
+            <input type="text" name="judul" value="{{ old('judul', $pengumuman->judul) }}" 
+                   class="w-full border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+            @error('judul') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="isi" class="form-label">Isi / Deskripsi Pengumuman</label>
-            <textarea class="form-control @error('isi') is-invalid @enderror" id="isi" name="isi" rows="5" required>{{ old('isi', $pengumuman->isi) }}</textarea>
-            @error('isi')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+        <div class="mb-4">
+            <label class="block font-semibold mb-1">Isi</label>
+            <textarea name="isi" rows="5" 
+                      class="w-full border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500">{{ old('isi', $pengumuman->isi) }}</textarea>
+            @error('isi') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="tanggal" class="form-label">Tanggal Pengumuman</label>
-            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" value="{{ old('tanggal', $pengumuman->tanggal) }}" required>
-            @error('tanggal')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+        <div class="mb-4">
+            <label class="block font-semibold mb-1">Tanggal</label>
+            <input type="date" name="tanggal" value="{{ old('tanggal', $pengumuman->tanggal) }}" 
+                   class="w-full border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+            @error('tanggal') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
-        
-        <div class="mb-3">
-            <label for="gambar" class="form-label">Foto / Gambar Pengumuman Saat Ini</label>
-            @if ($pengumuman->gambar)
-                <div class="mb-2">
-                    <img src="{{ Storage::url($pengumuman->gambar) }}" alt="Gambar Lama" class="img-thumbnail" style="max-height: 150px;">
-                </div>
+
+        <div class="mb-4">
+            <label class="block font-semibold mb-1">Gambar Saat Ini</label>
+            @if($pengumuman->gambar)
+                <img src="{{ asset('storage/' . $pengumuman->gambar) }}" class="w-32 h-32 object-cover rounded mb-2">
+            @else
+                <p class="text-gray-400 italic">Tidak ada gambar</p>
             @endif
-            
-            <label for="gambar_baru" class="form-label">Ganti Foto (Pilih baru jika ingin mengganti)</label>
-            <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar_baru" name="gambar" accept="image/*">
-            <small class="form-text text-muted">Kosongkan jika tidak ingin mengganti gambar.</small>
-            @error('gambar')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+            <input type="file" name="gambar" 
+                   class="w-full border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+            @error('gambar') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Pengumuman</button>
+        <div class="flex justify-end gap-2">
+            <a href="{{ route('admin.pengumuman.index') }}" 
+               class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg">Batal</a>
+            <button type="submit" 
+                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Update</button>
+        </div>
     </form>
 </div>
 @endsection

@@ -7,30 +7,41 @@ use App\Models\PengajuanSurat;
 
 class PengajuanSuratController extends Controller
 {
+    // tampil form di sisi user
     public function create()
     {
-        return view('pages.layanan.pengajuan-surat'); // sesuaikan dengan folder view kamu
+        return view('user.pages.layanan.pengajuan-surat');
     }
 
+    // simpan pengajuan dari user
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'email' => 'required|email',
-            'jenis_surat' => 'required|string',
-            'deskripsi' => 'required|string',
+            'nama' => 'required',
+            'nik' => 'required',
+            'jenis_surat' => 'required',
+            'keperluan' => 'required',
         ]);
 
-        // Simpan ke database
-        PengajuanSurat::create([
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'jenis_surat' => $request->jenis_surat,
-            'deskripsi' => $request->deskripsi,
-        ]);
+        PengajuanSurat::create($request->all());
 
-        // Redirect balik dengan pesan sukses
-        return redirect()->back()->with('success', 'Pengajuan surat berhasil diajukan!');
+        return redirect()->back()->with('success', 'Pengajuan surat berhasil dikirim!');
+    }
+
+    // tampilkan semua pengajuan di sisi admin
+    public function index()
+    {
+        $pengajuan = PengajuanSurat::latest()->get();
+        return view('admin.pages.layanan.index', compact('pengajuan'));
+    }
+
+    // ubah status (opsional)
+    public function updateStatus($id)
+    {
+        $pengajuan = PengajuanSurat::findOrFail($id);
+        $pengajuan->status = request('status');
+        $pengajuan->save();
+
+        return redirect()->back()->with('success', 'Status berhasil diperbarui!');
     }
 }

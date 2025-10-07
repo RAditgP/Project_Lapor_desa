@@ -22,7 +22,7 @@
         >
           <!-- FOTO -->
           @if(!empty($item->foto))
-            <img src="{{ asset('public/storage/pengaduan/' . $item->foto) }}"
+            <img src="{{ asset('storage/pengaduan/' . $item->foto) }}"
                  alt="Foto Laporan"
                  class="w-full h-48 object-cover">
           @else
@@ -63,7 +63,7 @@
 
               <!-- TOMBOL DETAIL -->
               <button
-                onclick="showDetail('{{ addslashes($item->judul) }}', '{{ addslashes($item->nama) }}', '{{ addslashes($item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-') }}', '{{ addslashes($item->isi) }}', '{{ asset('storage/laporan/' . $item->foto) }}')"
+                onclick="showDetail('{{ addslashes($item->judul) }}', '{{ addslashes($item->nama) }}', '{{ addslashes($item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-') }}', '{{ addslashes($item->isi) }}', '{{ asset('storage/pengaduan/' . $item->foto) }}')"
                 class="px-4 py-2 text-sm font-semibold bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200 transition-all duration-200 flex items-center gap-1"
               >
                 Detail

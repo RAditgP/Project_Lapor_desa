@@ -7,6 +7,7 @@ use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PengajuanSuratController;
 use App\Http\Controllers\InformasiDesaController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminPengaduanController;
 use App\Http\Controllers\AdminLayananController;
 
@@ -20,12 +21,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ======================================================
 // 2. RUTE ADMIN (DILINDUNGI MIDDLEWARE AUTH)
 // ======================================================
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::middleware(['auth'])->prefix('admin')->group(function () {
+        // Dashboard Admin
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
-    // Dashboard Admin
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+        // Logout di sidebar admin
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
 
     // CRUD Pengumuman (Admin)
     Route::resource('pengumuman', AdminPengumumanController::class);

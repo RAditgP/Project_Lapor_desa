@@ -14,7 +14,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="bg-emerald-600 text-white p-5 rounded-xl shadow hover:shadow-lg transition">
             <p class="text-sm">Total Pengumuman</p>
-            <h3 class="text-4xl font-bold mt-1">{{ $total_pengumuman ?? 0 }}</h3>
+           <h3 class="text-4xl font-bold mt-1">{{ $total_pengumuman ?? 0 }}</h3>
         </div>
         <div class="bg-blue-600 text-white p-5 rounded-xl shadow hover:shadow-lg transition">
             <p class="text-sm">Total Pengaduan</p>

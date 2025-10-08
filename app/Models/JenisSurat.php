@@ -9,10 +9,10 @@ class JenisSurat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama_surat', 'deskripsi'];
+    protected $fillable = ['nama']; // kolom di tabel jenis_surats
 
     public function pengajuanSurat()
     {
-        return $this->hasMany(PengajuanSurat::class);
+        return $this->hasMany(PengajuanSurat::class, 'jenis_surat_id');
     }
 }

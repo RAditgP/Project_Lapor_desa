@@ -8,6 +8,7 @@ use App\Http\Controllers\PengajuanSuratController;
 use App\Http\Controllers\InformasiDesaController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\AdminPengaduanController;
+use App\Http\Controllers\AdminPengajuanSuratController;
 use App\Http\Controllers\AdminLayananController;
 
 // ======================================================
@@ -34,10 +35,13 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/layanan/{layanan}/status', [AdminLayananController::class, 'updateStatus'])->name('admin.layanan.updateStatus');
 
     // ADMIN
-   // ADMIN
-Route::get('/admin/layanan/pengajuan-surat', [PengajuanSuratController::class, 'index'])->name('admin.pengajuan-surat.index');
-Route::post('/admin/layanan/pengajuan-surat/{id}/status', [PengajuanSuratController::class, 'updateStatus'])->name('admin.pengajuan-surat.status');
-// Logout di sidebar admin (biar tetap aman dalam grup auth)
+    // ADMIN
+   // Halaman daftar pengajuan surat di admin
+Route::get('/layanan', [AdminLayananController::class, 'index'])->name('layanan.index');
+
+// Ubah status surat
+Route::post('/layanan/{id}/status', [AdminLayananController::class, 'updateStatus'])->name('layanan.updateStatus');
+ // Logout di sidebar admin (biar tetap aman dalam grup auth)
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

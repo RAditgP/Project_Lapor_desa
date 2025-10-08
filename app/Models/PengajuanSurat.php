@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,12 +15,14 @@ class PengajuanSurat extends Model
         'no_telepon',
         'alamat',
         'jenis_surat_id',
-        'lampiran',
+        'alasan',
         'status',
+        'file_pendukung',
     ];
 
     public function jenisSurat()
     {
-        return $this->belongsTo(JenisSurat::class);
+        // nama model, nama kolom foreign key, nama primary key di tabel jenis_surat
+        return $this->belongsTo(JenisSurat::class, 'jenis_surat_id', 'id');
     }
 }

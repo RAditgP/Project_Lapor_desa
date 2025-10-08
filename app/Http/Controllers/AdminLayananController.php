@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Layanan;
 use Illuminate\Http\Request;
+use App\Models\PengajuanSurat;
+use App\Models\JenisSurat;
 
 class AdminLayananController extends Controller
 {
-    // Tampilkan daftar layanan
-    public function index()
-    {
-        $layanans = Layanan::latest()->get();
-        return view('admin.layanan.index', compact('layanans'));
-    }
+    // Menampilkan daftar pengajuan surat
+   public function index()
+{
+    $pengajuans = \App\Models\PengajuanSurat::with('jenisSurat')->latest()->get();
+    return view('admin.layanan.index', compact('pengajuans'));
+}
 
-    // Ubah status
-    public function updateStatus(Request $request, Layanan $layanan)
+
+    // Update status surat
+    public function updateStatus(Request $request, $id)
     {
-        $layanan->update(['status' => $request->status]);
-        return back()->with('success', 'Status layanan berhasil diperbarui.');
+        $surat = PengajuanSurat::findOrFail($id);
+        $surat->status = $request->status;
+        $surat->save();
+
+        return redirect()->route('admin.layanan.index')->with('success', 'Status pengajuan surat berhasil diperbarui!');
     }
 }

@@ -34,7 +34,15 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 
     // CRUD Pengumuman (Admin)
-    Route::resource('pengumuman', AdminPengumumanController::class);
+Route::resource('pengumuman', AdminPengumumanController::class)->names([
+    'index' => 'admin.pengumuman.index',
+    'create' => 'admin.pengumuman.create',
+    'store' => 'admin.pengumuman.store',
+    'show' => 'admin.pengumuman.show',
+    'edit' => 'admin.pengumuman.edit',
+    'update' => 'admin.pengumuman.update',
+    'destroy' => 'admin.pengumuman.destroy',
+]);
 
     // CRUD Pengaduan (Admin): Nama rute akan menjadi 'admin.pengaduan.index', dll.
     Route::resource('pengaduan', AdminPengaduanController::class)->only(['index', 'show', 'destroy']);

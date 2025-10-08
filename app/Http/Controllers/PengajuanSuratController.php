@@ -33,4 +33,5 @@ class PengajuanSuratController extends Controller
 
         return redirect()->back()->with('success', 'Pengajuan surat berhasil dikirim!');
     }
+    
 }

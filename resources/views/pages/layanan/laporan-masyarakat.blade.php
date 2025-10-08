@@ -20,6 +20,22 @@
           class="relative group bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md 
                  hover:shadow-2xl hover:border-emerald-300 transition-all duration-300 transform hover:-translate-y-2"
         >
+          <!-- FOTO -->
+         @if ($item->foto)
+                    {{-- TAMPILKAN FOTO DARI STORAGE --}}
+                    {{-- Perlu menjalankan 'php artisan storage:link' --}}
+                    <div class="h-48 bg-gray-100 overflow-hidden">
+                        <img src="{{ Storage::url($item->foto) }}" 
+                             alt="Foto Pengaduan: {{ $item->judul }}" 
+                             class="w-full h-full object-cover transition duration-500 hover:opacity-90">
+                    </div>
+                @else
+                    {{-- Placeholder jika tidak ada foto --}}
+                    <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-500 font-semibold">
+                        Tidak Ada Foto
+                    </div>
+                @endif
+
           <!-- HEADER HIJAU -->
           <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white p-5">
             <h3 class="text-lg font-extrabold uppercase tracking-wide leading-snug">
@@ -51,15 +67,20 @@
               </span>
 
               <!-- TOMBOL DETAIL -->
-              <button
-                onclick="showDetail('{{ addslashes($item->judul) }}', '{{ addslashes($item->nama) }}', '{{ addslashes($item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-') }}', '{{ addslashes($item->isi) }}')"
-                class="px-4 py-2 text-sm font-semibold bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200 transition-all duration-200 flex items-center gap-1"
-              >
-                Detail
-                <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-4 h-4'>
-                  <path stroke-linecap='round' stroke-linejoin='round' d='M9 5l7 7-7 7' />
-                </svg>
-              </button>
+             <button
+              onclick="showDetail(
+                '{{ addslashes($item->judul ?? '') }}', 
+                    '{{ addslashes($item->nama ?? '') }}', 
+                '{{ addslashes($item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-') }}', 
+                  '{{ addslashes($item->isi ?? '') }}', 
+                  '{{ $item->foto ? Storage::url($item->foto) : '' }}' 
+                    )"
+                      class="px-4 py-2 text-sm font-semibold bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200 transition-all duration-200 flex items-center gap-1"
+                >Detail
+                  <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' class='w-4 h-4'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M9 5l7 7-7 7' />
+                        </svg>
+                        </button>
             </div>
           </div>
         </div>
@@ -83,6 +104,9 @@
     <h2 id="modalJudul" class="text-2xl font-extrabold text-emerald-700 uppercase mb-2 tracking-wide"></h2>
     <p id="modalTanggal" class="text-sm text-gray-500 mb-3"></p>
     <p id="modalNama" class="font-semibold text-gray-700 mb-3"></p>
+    <div id="modalFotoContainer" class="my-4 hidden">
+      <img id="modalFoto" src="" alt="Foto Laporan" class="rounded-lg w-full object-cover max-h-80 shadow-md">
+    </div>
     <div class="border-t border-gray-200 my-4"></div>
     <p id="modalIsi" class="text-gray-700 leading-relaxed text-sm whitespace-pre-line"></p>
   </div>
@@ -90,11 +114,22 @@
 
 <!-- SCRIPT MODAL -->
 <script>
-  function showDetail(judul, nama, tanggal, isi) {
+  function showDetail(judul, nama, tanggal, isi, fotoUrl) {
     document.getElementById('modalJudul').innerText = judul;
     document.getElementById('modalNama').innerText = '👤 ' + nama;
     document.getElementById('modalTanggal').innerText = tanggal;
     document.getElementById('modalIsi').innerText = isi;
+
+    const fotoContainer = document.getElementById('modalFotoContainer');
+    const modalFoto = document.getElementById('modalFoto');
+
+    if (fotoUrl && !fotoUrl.includes('no-image')) {
+      modalFoto.src = fotoUrl;
+      fotoContainer.classList.remove('hidden');
+    } else {
+      fotoContainer.classList.add('hidden');
+    }
+
     document.getElementById('detailModal').classList.remove('hidden');
   }
 

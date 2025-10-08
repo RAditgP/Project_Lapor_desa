@@ -10,9 +10,19 @@ class PengajuanSurat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
+        'nama_lengkap',
         'nik',
-        'jenis_surat',
-        'keperluan',
+        'no_telepon',
+        'alamat',
+        'jenis_surat_id',
+        'alasan',
+        'status',
+        'file_pendukung',
     ];
+
+    public function jenisSurat()
+    {
+        // nama model, nama kolom foreign key, nama primary key di tabel jenis_surat
+        return $this->belongsTo(JenisSurat::class, 'jenis_surat_id', 'id');
+    }
 }

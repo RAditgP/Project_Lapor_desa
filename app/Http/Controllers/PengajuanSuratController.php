@@ -1,27 +1,35 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PengajuanSurat;
+use App\Models\JenisSurat;
 
 class PengajuanSuratController extends Controller
 {
     public function create()
     {
-        return view('pages.layanan.pengajuan-surat');
+        $jenis_surats = JenisSurat::all();
+        return view('pages.layanan.pengajuan-surat', compact('jenis_surats'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
+        $validated = $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
             'nik' => 'required|string|max:20',
-            'jenis_surat' => 'required|string|max:255',
-            'keperluan' => 'required|string',
+            'no_telepon' => 'required|string|max:20',
+            'alamat' => 'required|string',
+            'jenis_surat_id' => 'required|exists:jenis_surats,id',
+            'alasan' => 'nullable|string',
+            'file_pendukung' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
         ]);
 
-        PengajuanSurat::create($request->all());
+        if ($request->hasFile('file_pendukung')) {
+            $validated['file_pendukung'] = $request->file('file_pendukung')->store('lampiran', 'public');
+        }
+
+        PengajuanSurat::create($validated);
 
         return redirect()->back()->with('success', 'Pengajuan surat berhasil dikirim!');
     }

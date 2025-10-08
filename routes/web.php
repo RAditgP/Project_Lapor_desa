@@ -9,8 +9,10 @@ use App\Http\Controllers\InformasiDesaController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminPengaduanController;
+use App\Http\Controllers\AdminPengajuanSuratController;
 use App\Http\Controllers\AdminLayananController;
-
+use App\Http\Controllers\AdminLaporanController;
+use App\Http\Controllers\AdminKegiatanController;
 // ======================================================
 // 1. RUTE AUTENTIKASI (LOGIN & LOGOUT)
 // ======================================================
@@ -21,15 +23,17 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ======================================================
 // 2. RUTE ADMIN (DILINDUNGI MIDDLEWARE AUTH)
 // ======================================================
-Route::middleware(['auth'])
-      ->prefix('admin')
-      ->name('admin.') // <-- Perbaikan UTAMA ada di sini!
-      ->group(function () {
-    
-    // Dashboard Admin: Nama rute akan menjadi 'admin.dashboard'
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    // CRUD Pengumuman (Admin): Nama rute akan menjadi 'admin.pengumuman.create', dll.
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    // Dashboard Admin
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+    // Logout di sidebar admin
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
+    // CRUD Pengumuman (Admin)
     Route::resource('pengumuman', AdminPengumumanController::class);
 
     // CRUD Pengaduan (Admin): Nama rute akan menjadi 'admin.pengaduan.index', dll.
@@ -39,14 +43,17 @@ Route::middleware(['auth'])
     Route::get('/layanan', [AdminLayananController::class, 'index'])->name('layanan.index');
     Route::post('/layanan/{layanan}/status', [AdminLayananController::class, 'updateStatus'])->name('layanan.updateStatus');
 
-    // Kelola Pengajuan Surat (Nama rute: 'admin.pengajuan-surat.index', 'admin.pengajuan-surat.status')
-    // Perhatikan: Menghapus /admin/ di URI karena sudah ditangani oleh prefix grup
-    Route::get('layanan/pengajuan-surat', [PengajuanSuratController::class, 'index'])->name('pengajuan-surat.index');
-    Route::post('layanan/pengajuan-surat/{id}/status', [PengajuanSuratController::class, 'updateStatus'])->name('pengajuan-surat.status');
 
-    // Logout di sidebar admin (Nama rute: 'admin.logout' jika Anda mau, tapi 'logout' sudah cukup)
-    // Dibiarkan tanpa awalan 'admin.' agar konsisten, tapi tetap berada dalam grup auth.
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
+    // ADMIN
+    // ADMIN
+    // Halaman daftar pengajuan surat di admin
+    Route::get('/layanan', [AdminLayananController::class, 'index'])->name('layanan.index');
+
+    // Ubah status surat
+    Route::post('/layanan/{id}/status', [AdminLayananController::class, 'updateStatus'])->name('layanan.updateStatus');
+    // Logout di sidebar admin (biar tetap aman dalam grup auth)
+    Route::get('/laporan-masyarakat', [AdminLaporanController::class, 'index'])->name('admin.laporan');
+    Route::get('/kegiatan-masyarakat', [AdminKegiatanController::class, 'index'])->name('admin.kegiatan');
 
 });
 
@@ -72,7 +79,7 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
     Route::view('/donasi-desa', 'pages.layanan.donasi-desa')->name('donasi-desa');
     Route::view('/kegiatan-masyarakat', 'pages.layanan.kegiatan-masyarakat')->name('kegiatan-masyarakat');
 
-    Route::get('/pengajuan-surat', [PengajuanSuratController::class, 'create'])->name('pengajuan-surat.create');
+    Route::get('/pengajuan-surat', [PengajuanSuratController::class, 'create'])->name('pengajuan-surat.form');
     Route::post('/pengajuan-surat', [PengajuanSuratController::class, 'store'])->name('pengajuan-surat.store');
     Route::get('/informasi-desa', [InformasiDesaController::class, 'index'])->name('informasi-desa');
     Route::get('/laporan-masyarakat', [PengaduanController::class, 'laporan'])->name('laporan-masyarakat');

@@ -16,7 +16,7 @@
         {{-- SIDEBAR --}}
         <aside class="bg-emerald-800 text-white w-64 flex flex-col transition-all duration-300"
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-64 md:translate-x-0'">
-            
+
             {{-- Header --}}
             <div class="p-5 border-b border-emerald-700">
                 <h1 class="text-2xl font-bold tracking-wide text-center">LAPOR DESA</h1>
@@ -41,6 +41,19 @@
                     class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-emerald-700 transition @if(Request::is('admin/layanan*')) bg-emerald-700 @endif">
                     ⚙️ <span>Layanan Online</span>
                 </a>
+                <a href="{{ url('/admin/laporan-masyarakat') }}"
+                    class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-emerald-700 transition 
+    @if(Request::is('admin/laporan-masyarakat*')) bg-emerald-700 @endif">
+                    📋 <span>Laporan Masyarakat</span>
+                </a>
+
+                <a href="{{ url('/admin/kegiatan-masyarakat') }}"
+                    class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-emerald-700 transition 
+    @if(Request::is('admin/kegiatan-masyarakat*')) bg-emerald-700 @endif">
+                    🎉 <span>Kegiatan Masyarakat</span>
+                </a>
+
+
             </nav>
 
             {{-- Tombol Logout --}}

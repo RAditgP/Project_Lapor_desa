@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminLayananController;
 use App\Http\Controllers\AdminLaporanController;
 use App\Http\Controllers\AdminKegiatanController;
 
+use App\Http\Controllers\KegiatanController;
 // ======================================================
 // 1. RUTE AUTENTIKASI (LOGIN & LOGOUT)
 // ======================================================
@@ -67,14 +68,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/pengajuan-surat', [AdminPengajuanSuratController::class, 'index'])
         ->name('admin.pengajuan-surat.index');
 
-    Route::post('/pengajuan-surat/{id}/update-status', [AdminPengajuanSuratController::class, 'updateStatus'])
-        ->name('admin.pengajuan-surat.update-status');
 
-    // ======================================================
-    // Laporan & Kegiatan Masyarakat
-    // ======================================================
+    // Ubah status surat
+    Route::post('/layanan/{id}/status', [AdminLayananController::class, 'updateStatus'])->name('admin.  layanan.updateStatus');
+    // Logout di sidebar admin (biar tetap aman dalam grup auth)
     Route::get('/laporan-masyarakat', [AdminLaporanController::class, 'index'])->name('admin.laporan');
-    Route::get('/kegiatan-masyarakat', [AdminKegiatanController::class, 'index'])->name('admin.kegiatan');
+    Route::resource('kegiatan-masyarakat', AdminKegiatanController::class, ['as' => 'admin']);
+
+>>>>>>> b14c1d046517e8c9bdb1c9e6a17627664f2e9b40
 });
 
 // ======================================================
@@ -97,7 +98,11 @@ Route::get('/laporan', [PengaduanController::class, 'laporan'])->name('laporan.i
 // Grup layanan online
 Route::prefix('layanan')->name('layanan.')->group(function () {
     Route::view('/donasi-desa', 'pages.layanan.donasi-desa')->name('donasi-desa');
-    Route::view('/kegiatan-masyarakat', 'pages.layanan.kegiatan-masyarakat')->name('kegiatan-masyarakat');
+    // Halaman daftar kegiatan masyarakat
+    Route::get('/kegiatan-masyarakat', [App\Http\Controllers\KegiatanController::class, 'index'])->name('kegiatan-masyarakat');
+
+    // Halaman detail kegiatan masyarakat
+    Route::get('/kegiatan-masyarakat/{id}', [App\Http\Controllers\KegiatanController::class, 'show'])->name('kegiatan-masyarakat.show');
 
     Route::get('/pengajuan-surat', [PengajuanSuratController::class, 'create'])->name('pengajuan-surat.form');
     Route::post('/pengajuan-surat', [PengajuanSuratController::class, 'store'])->name('pengajuan-surat.store');

@@ -3,132 +3,79 @@
 @section('title', 'Kegiatan Masyarakat')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="bg-white shadow-md rounded-lg p-6">
-        <h1 class="text-3xl font-bold text-center text-emerald-700 mb-6">Dokumentasi Kegiatan masyarakat</h1>
-        <p class="text-center text-gray-600 mb-8">
-            Berikut adalah dokumentasi visual dari beberapa laporan masyarakat dan kegiatan desa yang telah dilaksanakan.
-        </p>
+<section class="py-12 bg-gray-50 min-h-screen" x-data="{ open: false, kegiatan: {} }">
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold text-emerald-700 mb-8 text-center">
+            Dokumentasi Kegiatan Masyarakat Desa
+        </h1>
 
-        <!-- Grid untuk Laporan dalam Bentuk Card -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        @if ($kegiatans->isEmpty())
+            <div class="text-center text-gray-500">
+                Belum ada kegiatan yang ditambahkan.
+            </div>
+        @else
+            <div class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
+                @foreach ($kegiatans as $kegiatan)
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+                        @if ($kegiatan->foto)
+                            <img src="{{ asset('storage/' . $kegiatan->foto) }}"
+                                alt="{{ $kegiatan->judul }}"
+                                class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                        @else
+                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400 italic">
+                                Tidak ada foto
+                            </div>
+                        @endif
 
-            <!-- Contoh Laporan 1 -->
-<div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-    <img src="{{ asset('images/pengumuman/senam.jpg') }}" 
-         alt="Laporan Kegiatan 1" 
-         class="w-full h-48 object-cover">
-    <div class="p-4">
-        <h3 class="text-lg font-bold text-emerald-700 mb-2">Senam Mingguan Desa</h3>
-        <p class="text-sm text-gray-500 mb-2">16 Sep 2025</p>
-        <p class="text-gray-600 text-sm">
-            Kegiatan senam rutin di lapangan desa untuk menjaga kesehatan dan kebersamaan warga.
-        </p>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold text-emerald-700 mb-2">
+                                {{ $kegiatan->judul }}
+                            </h3>
+                            <p class="text-sm text-gray-500 mb-2">
+                                {{ \Carbon\Carbon::parse($kegiatan->tanggal)->translatedFormat('d F Y') }}
+                            </p>
+
+                            {{-- tampilkan hanya 20 kata pertama --}}
+                            <p class="text-gray-600 text-sm mb-4">
+                                {{ \Illuminate\Support\Str::words(strip_tags($kegiatan->deskripsi), 20, '...') }}
+                            </p>
+
+                            <button
+                                @click="open = true; kegiatan = {
+                                    judul: '{{ $kegiatan->judul }}',
+                                    tanggal: '{{ \Carbon\Carbon::parse($kegiatan->tanggal)->translatedFormat('d F Y') }}',
+                                    deskripsi: `{{ addslashes($kegiatan->deskripsi) }}`,
+                                    foto: '{{ $kegiatan->foto ? asset('storage/' . $kegiatan->foto) : '' }}'
+                                }"
+                                class="inline-block bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition">
+                                Lihat Detail
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </div>
-</div>
 
-<!-- Contoh Laporan 2 -->
-<div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-    <img src="{{ asset('images/pengumuman/jalan.jpg') }}" 
-         alt="Laporan Kegiatan 2" 
-         class="w-full h-48 object-cover">
-    <div class="p-4">
-        <h3 class="text-lg font-bold text-emerald-700 mb-2">Gotong Royong Perbaikan Jalan</h3>
-        <p class="text-sm text-gray-500 mb-2">15 Sep 2025</p>
-        <p class="text-gray-600 text-sm">
-            Warga desa bergotong royong memperbaiki jalan utama yang rusak akibat hujan.
-        </p>
-    </div>
-</div>
+    <!-- Modal Detail Kegiatan -->
+    <div x-show="open" 
+         x-transition.opacity
+         class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50"
+         x-cloak>
+        <div @click.away="open = false" 
+             x-transition.scale
+             class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl relative">
+            <button @click="open = false"
+                class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl leading-none">&times;</button>
 
-<!-- Contoh Laporan 3 -->
-<div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-    <img src="{{ asset('images/pengumuman/sembako.jpg') }}" 
-         alt="Laporan Kegiatan 3" 
-         class="w-full h-48 object-cover">
-    <div class="p-4">
-        <h3 class="text-lg font-bold text-emerald-700 mb-2">Pemberian Bantuan Sembako</h3>
-        <p class="text-sm text-gray-500 mb-2">12 Sep 2025</p>
-        <p class="text-gray-600 text-sm">
-            Penyaluran bantuan sembako kepada warga yang membutuhkan di balai desa.
-        </p>
-    </div>
-</div>
+            <template x-if="kegiatan.foto">
+                <img :src="kegiatan.foto" alt="Foto Kegiatan" class="w-full h-56 object-cover rounded-lg mb-4">
+            </template>
 
-
-            <!-- Tambahkan lebih banyak laporan di sini -->
-            <!-- Contoh Laporan 4 -->
-            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-                <img src="https://placehold.co/600x400/333333/E0E0E0?text=Laporan+Kegiatan+4"
-                    alt="Laporan Kegiatan 4" class="w-full h-auto object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-emerald-700 mb-2">Senam Mingguan Desa</h3>
-                    <p class="text-sm text-gray-500 mb-2">16 Sep 2025</p>
-                    <p class="text-gray-600 text-sm">
-                        Kegiatan senam rutin di lapangan desa untuk menjaga kesehatan dan kebersamaan warga.
-                    </p>
-                </div>
-            </div>
-            <!-- Contoh Laporan 5 -->
-            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-                <img src="https://placehold.co/600x400/333333/E0E0E0?text=Laporan+Kegiatan+5"
-                    alt="Laporan Kegiatan 5" class="w-full h-auto object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-emerald-700 mb-2">Senam Mingguan Desa</h3>
-                    <p class="text-sm text-gray-500 mb-2">16 Sep 2025</p>
-                    <p class="text-gray-600 text-sm">
-                        Kegiatan senam rutin di lapangan desa untuk menjaga kesehatan dan kebersamaan warga.
-                    </p>
-                </div>
-            </div>
-            <!-- Contoh Laporan 6 -->
-            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-                <img src="https://placehold.co/600x400/333333/E0E0E0?text=Laporan+Kegiatan+6"
-                    alt="Laporan Kegiatan 6" class="w-full h-auto object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-emerald-700 mb-2">Senam Mingguan Desa</h3>
-                    <p class="text-sm text-gray-500 mb-2">16 Sep 2025</p>
-                    <p class="text-gray-600 text-sm">
-                        Kegiatan senam rutin di lapangan desa untuk menjaga kesehatan dan kebersamaan warga.
-                    </p>
-                </div>
-            </div>
-            <!-- Contoh Laporan 7 -->
-            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-                <img src="https://placehold.co/600x400/333333/E0E0E0?text=Laporan+Kegiatan+7"
-                    alt="Laporan Kegiatan 7" class="w-full h-auto object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-emerald-700 mb-2">Senam Mingguan Desa</h3>
-                    <p class="text-sm text-gray-500 mb-2">16 Sep 2025</p>
-                    <p class="text-gray-600 text-sm">
-                        Kegiatan senam rutin di lapangan desa untuk menjaga kesehatan dan kebersamaan warga.
-                    </p>
-                </div>
-            </div>
-            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-                <img src="https://placehold.co/600x400/333333/E0E0E0?text=Laporan+Kegiatan+7"
-                    alt="Laporan Kegiatan 7" class="w-full h-auto object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-emerald-700 mb-2">Senam Mingguan Desa</h3>
-                    <p class="text-sm text-gray-500 mb-2">16 Sep 2025</p>
-                    <p class="text-gray-600 text-sm">
-                        Kegiatan senam rutin di lapangan desa untuk menjaga kesehatan dan kebersamaan warga.
-                    </p>
-                </div>
-            </div>
-            <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-                <img src="https://placehold.co/600x400/333333/E0E0E0?text=Laporan+Kegiatan+7"
-                    alt="Laporan Kegiatan 7" class="w-full h-auto object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-emerald-700 mb-2">Senam Mingguan Desa</h3>
-                    <p class="text-sm text-gray-500 mb-2">16 Sep 2025</p>
-                    <p class="text-gray-600 text-sm">
-                        Kegiatan senam rutin di lapangan desa untuk menjaga kesehatan dan kebersamaan warga.
-                    </p>
-                </div>
-            </div>
-
+            <h2 class="text-2xl font-bold text-emerald-700 mb-2" x-text="kegiatan.judul"></h2>
+            <p class="text-sm text-gray-500 mb-4" x-text="kegiatan.tanggal"></p>
+            <p class="text-gray-700 leading-relaxed whitespace-pre-line" x-text="kegiatan.deskripsi"></p>
         </div>
     </div>
-</div>
+</section>
 @endsection

@@ -6,21 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   public function up(): void
-{
-    Schema::create('pengaduans', function (Blueprint $table) {
-        $table->id();
-        $table->string('nama');
-        $table->string('telepon');
-        $table->string('judul');
-        $table->text('isi');
-        $table->string('foto')->nullable(); // <--- tambahkan kolom ini
-        $table->timestamps();
-    });
-}
+    /**
+     * Run the migrations.
+     */
+    public function up()
+    {
+        Schema::create('pengaduans', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('telepon');
+            $table->string('judul');
+            $table->text('isi');
+            // WAJIB DITAMBAHKAN: Kolom untuk menyimpan path/lokasi foto di server
+            $table->string('foto')->nullable(); 
+            $table->timestamps();
+        });
+    }
 
-
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('pengaduans');
     }

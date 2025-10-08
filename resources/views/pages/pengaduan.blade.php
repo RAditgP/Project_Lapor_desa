@@ -38,7 +38,15 @@
             placeholder="Masukkan judul pengaduan"
             class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
     </div>
+    <!-- Upload Foto -->
+    <div>
+    <div>
+        <label for="foto" class="block text-sm font-semibold text-gray-700 mb-2">Unggah Foto (Opsional)</label>
+        <input type="file" name="foto" id="foto" accept="image/*"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+    </div>
 
+    
     <!-- Isi -->
     <div>
         <label for="isi" class="block text-sm font-semibold text-gray-700 mb-2">Isi Pengaduan</label>
@@ -47,13 +55,6 @@
             class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></textarea>
     </div>
 
-    <!-- Upload Foto -->
-    <div>
-    <div>
-        <label for="foto" class="block text-sm font-semibold text-gray-700 mb-2">Unggah Foto (Opsional)</label>
-        <input type="file" name="foto" id="foto" accept="image/*"
-            class="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
-    </div>
 
     <!-- Tombol -->
     <div class="text-center pt-4">

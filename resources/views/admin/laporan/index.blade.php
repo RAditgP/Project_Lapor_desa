@@ -24,7 +24,7 @@
                     <tr class="border-b hover:bg-gray-50">
                         <td class="p-3">{{ $loop->iteration }}</td>
                         <td class="p-3">{{ $laporan->nama ?? '-' }}</td>
-                        <td class="p-3">{{ $laporan->isi_laporan ?? '-' }}</td>
+                        <td class="p-3">{{ $laporan->isi ?? '-' }}</td>
                         <td class="p-3">{{ $laporan->created_at->format('d M Y') }}</td>
                     </tr>
                 @endforeach

@@ -32,7 +32,7 @@
                     <td class="border px-3 py-2">{{ $item->nik }}</td>
                     <td class="border px-3 py-2">{{ $item->no_telepon }}</td>
                     <td class="border px-3 py-2">{{ $item->alamat }}</td>
-                    <td class="border px-3 py-2">{{ $item->jenisSurat->nama ?? '-' }}</td>
+                    <td class="border px-3 py-2">{{ $item->jenisSurat->nama_surat ?? '-' }}</td>
                     <td class="border px-3 py-2">{{ $item->alasan }}</td>
                     <td class="border px-3 py-2">
                         <span class="px-2 py-1 rounded text-sm

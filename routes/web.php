@@ -7,10 +7,12 @@ use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PengajuanSuratController;
 use App\Http\Controllers\InformasiDesaController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminPengaduanController;
 use App\Http\Controllers\AdminPengajuanSuratController;
 use App\Http\Controllers\AdminLayananController;
-
+use App\Http\Controllers\AdminLaporanController;
+use App\Http\Controllers\AdminKegiatanController;
 // ======================================================
 // 1. RUTE AUTENTIKASI (LOGIN & LOGOUT)
 // ======================================================
@@ -21,12 +23,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ======================================================
 // 2. RUTE ADMIN (DILINDUNGI MIDDLEWARE AUTH)
 // ======================================================
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-
+Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Dashboard Admin
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+    // Logout di sidebar admin
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
 
     // CRUD Pengumuman (Admin)
     Route::resource('pengumuman', AdminPengumumanController::class);
@@ -36,12 +40,14 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // ADMIN
     // ADMIN
-   // Halaman daftar pengajuan surat di admin
-Route::get('/layanan', [AdminLayananController::class, 'index'])->name('layanan.index');
+    // Halaman daftar pengajuan surat di admin
+    Route::get('/layanan', [AdminLayananController::class, 'index'])->name('layanan.index');
 
-// Ubah status surat
-Route::post('/layanan/{id}/status', [AdminLayananController::class, 'updateStatus'])->name('layanan.updateStatus');
- // Logout di sidebar admin (biar tetap aman dalam grup auth)
+    // Ubah status surat
+    Route::post('/layanan/{id}/status', [AdminLayananController::class, 'updateStatus'])->name('layanan.updateStatus');
+    // Logout di sidebar admin (biar tetap aman dalam grup auth)
+    Route::get('/laporan-masyarakat', [AdminLaporanController::class, 'index'])->name('admin.laporan');
+    Route::get('/kegiatan-masyarakat', [AdminKegiatanController::class, 'index'])->name('admin.kegiatan');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

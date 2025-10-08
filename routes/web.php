@@ -34,10 +34,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/layanan/{layanan}/status', [AdminLayananController::class, 'updateStatus'])->name('admin.layanan.updateStatus');
 
     // ADMIN
-    Route::get('/admin/layanan/pengajuan-surat', [PengajuanSuratController::class, 'index'])->name('admin.pengajuan-surat.index');
-    Route::post('/admin/layanan/pengajuan-surat/{id}/status', [PengajuanSuratController::class, 'updateStatus'])->name('admin.pengajuan-surat.status');
-
-    // Logout di sidebar admin (biar tetap aman dalam grup auth)
+   // ADMIN
+Route::get('/admin/layanan/pengajuan-surat', [PengajuanSuratController::class, 'index'])->name('admin.pengajuan-surat.index');
+Route::post('/admin/layanan/pengajuan-surat/{id}/status', [PengajuanSuratController::class, 'updateStatus'])->name('admin.pengajuan-surat.status');
+// Logout di sidebar admin (biar tetap aman dalam grup auth)
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
@@ -64,7 +64,7 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
     Route::view('/donasi-desa', 'pages.layanan.donasi-desa')->name('donasi-desa');
     Route::view('/kegiatan-masyarakat', 'pages.layanan.kegiatan-masyarakat')->name('kegiatan-masyarakat');
 
-    Route::get('/pengajuan-surat', [PengajuanSuratController::class, 'create'])->name('pengajuan-surat.create');
+    Route::get('/pengajuan-surat', [PengajuanSuratController::class, 'create'])->name('pengajuan-surat.form');
     Route::post('/pengajuan-surat', [PengajuanSuratController::class, 'store'])->name('pengajuan-surat.store');
     Route::get('/informasi-desa', [InformasiDesaController::class, 'index'])->name('informasi-desa');
     Route::get('/laporan-masyarakat', [PengaduanController::class, 'laporan'])->name('laporan-masyarakat');

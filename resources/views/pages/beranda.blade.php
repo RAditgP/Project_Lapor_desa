@@ -10,7 +10,7 @@
     <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80 
                 flex items-center justify-center text-center px-4">
         <div class="animate-fadeIn">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg"> 
                 Selamat Datang di Desa Konohagakure
             </h1>
             <p class="text-lg md:text-xl text-gray-200 mb-6">
@@ -67,25 +67,34 @@
         <h2 class="text-3xl font-bold text-center text-emerald-900 mb-12">Layanan Desa</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-emerald-50 rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition transform hover:-translate-y-2">
-                <h3 class="text-xl font-bold text-emerald-700 mb-2">Pengajuan Surat</h3>
-                <p class="text-gray-600 mb-4">Ajukan berbagai surat resmi secara online dengan mudah.</p>
-                <a href="{{ route('layanan.pengajuan-surat.create') }}" 
-                   class="text-emerald-600 font-medium hover:underline">Ajukan Sekarang</a>
+            <!-- Kartu 1 -->
+            <div class="bg-emerald-50 rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transition transform hover:-translate-y-2">
+                <h3 class="text-xl font-bold text-emerald-700 mb-3">Pengajuan Surat</h3>
+                <p class="text-gray-600 mb-6">Ajukan berbagai surat resmi secara online dengan mudah.</p>
+                <a href="{{ route('layanan.pengajuan-surat.form') }}" 
+                   class="inline-block bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 transition">
+                   Ajukan Sekarang
+                </a>
             </div>
 
-            <div class="bg-emerald-50 rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition transform hover:-translate-y-2">
-                <h3 class="text-xl font-bold text-emerald-700 mb-2">Pengaduan Warga</h3>
-                <p class="text-gray-600 mb-4">Sampaikan pengaduan atau laporan dengan cepat dan transparan.</p>
+            <!-- Kartu 2 -->
+            <div class="bg-emerald-50 rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transition transform hover:-translate-y-2">
+                <h3 class="text-xl font-bold text-emerald-700 mb-3">Pengaduan Warga</h3>
+                <p class="text-gray-600 mb-6">Sampaikan pengaduan atau laporan dengan cepat dan transparan.</p>
                 <a href="{{ route('pengaduan.create') }}" 
-                   class="text-emerald-600 font-medium hover:underline">Buat Pengaduan</a>
+                   class="inline-block bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 transition">
+                   Buat Pengaduan
+                </a>
             </div>
 
-            <div class="bg-emerald-50 rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition transform hover:-translate-y-2">
-                <h3 class="text-xl font-bold text-emerald-700 mb-2">Informasi Desa</h3>
-                <p class="text-gray-600 mb-4">Dapatkan informasi terbaru seputar kegiatan dan pelayanan desa.</p>
+            <!-- Kartu 3 -->
+            <div class="bg-emerald-50 rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transition transform hover:-translate-y-2">
+                <h3 class="text-xl font-bold text-emerald-700 mb-3">Informasi Desa</h3>
+                <p class="text-gray-600 mb-6">Dapatkan informasi terbaru seputar kegiatan dan pelayanan desa.</p>
                 <a href="{{ route('layanan.informasi-desa') }}" 
-                   class="text-emerald-600 font-medium hover:underline">Lihat Informasi</a>
+                   class="inline-block bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 transition">
+                   Lihat Informasi
+                </a>
             </div>
         </div>
     </div>

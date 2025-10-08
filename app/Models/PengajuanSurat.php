@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,9 +9,17 @@ class PengajuanSurat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
+        'nama_lengkap',
         'nik',
-        'jenis_surat',
-        'keperluan',
+        'no_telepon',
+        'alamat',
+        'jenis_surat_id',
+        'lampiran',
+        'status',
     ];
+
+    public function jenisSurat()
+    {
+        return $this->belongsTo(JenisSurat::class);
+    }
 }

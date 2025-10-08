@@ -1,65 +1,68 @@
-@extends('admin.layouts.navbar') 
+@extends('layouts.admin')
 
-{{-- Asumsikan Anda memiliki layout utama admin --}}
+@section('title', 'Daftar Pengumuman')
 
 @section('content')
-<div class="container">
-    <h2>Manajemen Pengumuman</h2>
-    
-    {{-- Tampilkan pesan success jika ada --}}
-    @if (session('success'))
-        <div class="alert alert-success">
+<div class="p-6 bg-white rounded-lg shadow-md">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Daftar Pengumuman</h1>
+        <a href="{{ route('admin.pengumuman.create') }}" 
+           class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition">
+            + Tambah Pengumuman
+        </a>
+    </div>
+
+    @if(session('success'))
+        <div class="mb-4 p-3 bg-green-100 text-green-800 rounded-lg">
             {{ session('success') }}
         </div>
     @endif
 
-    <div class="d-flex justify-content-end mb-3">
-        {{-- Tombol untuk pindah ke halaman Tambah Pengumuman --}}
-        <a href="{{ route('admin.pengumuman.create') }}" class="btn btn-success">
-            + Tambah Pengumuman Baru
-        </a>
-    </div>
-
-    <table class="table table-bordered">
-        <thead>
+    <table class="min-w-full border border-gray-200 text-sm text-gray-700">
+        <thead class="bg-gray-100">
             <tr>
-                <th style="width: 5%">No</th>
-                <th style="width: 15%">Gambar</th>
-                <th>Judul</th>
-                <th style="width: 15%">Tanggal</th>
-                <th style="width: 20%">Aksi</th>
+                <th class="px-4 py-2 border">No</th>
+                <th class="px-4 py-2 border">Judul</th>
+                <th class="px-4 py-2 border">Tanggal</th>
+                <th class="px-4 py-2 border">Gambar</th>
+                <th class="px-4 py-2 border">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($pengumumans as $pengumuman)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>
-                    @if ($pengumuman->gambar)
-                        {{-- Menggunakan Storage::url() untuk mengakses gambar yang disimpan di storage/app/public --}}
-                        <img src="{{ Storage::url($pengumuman->gambar) }}" alt="{{ $pengumuman->judul }}" class="img-thumbnail" style="max-height: 80px;">
-                    @else
-                        Tidak ada Gambar
-                    @endif
-                </td>
-                <td>{{ $pengumuman->judul }}</td>
-                <td>{{ \Carbon\Carbon::parse($pengumuman->tanggal)->format('d F Y') }}</td>
-                <td>
-                    {{-- Tombol Edit --}}
-                    <a href="{{ route('admin.pengumuman.edit', $pengumuman) }}" class="btn btn-warning btn-sm">Edit</a>
-                    
-                    {{-- Tombol Hapus --}}
-                    <form action="{{ route('admin.pengumuman.destroy', $pengumuman) }}" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus pengumuman ini?')">Hapus</button>
-                    </form>
-                </td>
-            </tr>
+            @forelse ($pengumumans as $index => $p)
+                <tr class="border-t hover:bg-gray-50">
+                    <td class="px-4 py-2 text-center">{{ $index + 1 }}</td>
+                    <td class="px-4 py-2">{{ $p->judul }}</td>
+                    <td class="px-4 py-2 text-center">{{ $p->tanggal }}</td>
+                    <td class="px-4 py-2 text-center">
+                        @if($p->gambar)
+                            <img src="{{ asset('storage/' . $p->gambar) }}" alt="gambar" class="w-16 h-16 object-cover rounded">
+                        @else
+                            <span class="text-gray-400 italic">Tidak ada</span>
+                        @endif
+                    </td>
+                    <td class="px-4 py-2 text-center">
+                        <div class="flex justify-center gap-2">
+                            <a href="{{ route('admin.pengumuman.edit', $p->id) }}" 
+                               class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">Edit</a>
+
+                            <form action="{{ route('admin.pengumuman.destroy', $p->id) }}" method="POST" 
+                                  onsubmit="return confirm('Yakin ingin menghapus pengumuman ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
             @empty
-            <tr>
-                <td colspan="5" class="text-center">Belum ada data pengumuman.</td>
-            </tr>
+                <tr>
+                    <td colspan="5" class="px-4 py-4 text-center text-gray-500 italic">
+                        Belum ada pengumuman
+                    </td>
+                </tr>
             @endforelse
         </tbody>
     </table>

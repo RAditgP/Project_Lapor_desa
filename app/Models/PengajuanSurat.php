@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PengajuanSurat extends Model
 {
     use HasFactory;
-protected $table = 'pengajuan_surats';
+
     protected $fillable = [
-        'nama', 'email', 'jenis_surat', 'deskripsi'
+        'nama',
+        'nik',
+        'jenis_surat',
+        'keperluan',
     ];
 }

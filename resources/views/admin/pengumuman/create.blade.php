@@ -1,48 +1,48 @@
-@extends('admin.layouts.navbar')
+@extends('layouts.admin')
+
+@section('title', 'Tambah Pengumuman')
 
 @section('content')
-<div class="container">
-    <h2>Tambah Pengumuman Baru</h2>
-    <a href="{{ route('admin.pengumuman.index') }}" class="btn btn-secondary mb-3">← Kembali</a>
+<div class="p-6 bg-white rounded-lg shadow-md max-w-2xl mx-auto">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Tambah Pengumuman</h1>
 
-    {{-- Form menggunakan route 'admin.pengumuman.store' --}}
     <form action="{{ route('admin.pengumuman.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        
-        <div class="mb-3">
-            <label for="judul" class="form-label">Judul Pengumuman</label>
-            <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}" required>
-            @error('judul')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+
+        <div class="mb-4">
+            <label class="block font-semibold mb-1">Judul</label>
+            <input type="text" name="judul" value="{{ old('judul') }}" 
+                   class="w-full border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+            @error('judul') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="isi" class="form-label">Isi / Deskripsi Pengumuman</label>
-            <textarea class="form-control @error('isi') is-invalid @enderror" id="isi" name="isi" rows="5" required>{{ old('isi') }}</textarea>
-            @error('isi')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+        <div class="mb-4">
+            <label class="block font-semibold mb-1">Isi</label>
+            <textarea name="isi" rows="5" 
+                      class="w-full border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500">{{ old('isi') }}</textarea>
+            @error('isi') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="tanggal" class="form-label">Tanggal Pengumuman</label>
-            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" value="{{ old('tanggal', now()->format('Y-m-d')) }}" required>
-            @error('tanggal')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-        
-        <div class="mb-3">
-            <label for="gambar" class="form-label">Foto / Gambar Pengumuman</label>
-            <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" accept="image/*">
-            <small class="form-text text-muted">Format: JPG, PNG, GIF. Max 2MB.</small>
-            @error('gambar')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+        <div class="mb-4">
+            <label class="block font-semibold mb-1">Tanggal</label>
+            <input type="date" name="tanggal" value="{{ old('tanggal') }}" 
+                   class="w-full border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+            @error('tanggal') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Simpan Pengumuman</button>
+        <div class="mb-4">
+            <label class="block font-semibold mb-1">Gambar (opsional)</label>
+            <input type="file" name="gambar" 
+                   class="w-full border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+            @error('gambar') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+        </div>
+
+        <div class="flex justify-end gap-2">
+            <a href="{{ route('admin.pengumuman.index') }}" 
+               class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg">Batal</a>
+            <button type="submit" 
+                    class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg">Simpan</button>
+        </div>
     </form>
 </div>
 @endsection

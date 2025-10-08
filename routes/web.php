@@ -13,8 +13,8 @@ use App\Http\Controllers\AdminPengajuanSuratController;
 use App\Http\Controllers\AdminLayananController;
 use App\Http\Controllers\AdminLaporanController;
 use App\Http\Controllers\AdminKegiatanController;
-
 use App\Http\Controllers\KegiatanController;
+
 // ======================================================
 // 1. RUTE AUTENTIKASI (LOGIN & LOGOUT)
 // ======================================================
@@ -26,22 +26,20 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // 2. RUTE ADMIN (DILINDUNGI MIDDLEWARE AUTH)
 // ======================================================
 Route::middleware(['auth'])->prefix('admin')->group(function () {
+
     // Dashboard Admin
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-
-    // Logout di sidebar admin
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // ======================================================
     // CRUD Pengumuman (Admin)
     // ======================================================
     Route::resource('pengumuman', AdminPengumumanController::class)->names([
-        'index' => 'admin.pengumuman.index',
-        'create' => 'admin.pengumuman.create',
-        'store' => 'admin.pengumuman.store',
-        'show' => 'admin.pengumuman.show',
-        'edit' => 'admin.pengumuman.edit',
-        'update' => 'admin.pengumuman.update',
+        'index'   => 'admin.pengumuman.index',
+        'create'  => 'admin.pengumuman.create',
+        'store'   => 'admin.pengumuman.store',
+        'show'    => 'admin.pengumuman.show',
+        'edit'    => 'admin.pengumuman.edit',
+        'update'  => 'admin.pengumuman.update',
         'destroy' => 'admin.pengumuman.destroy',
     ]);
 
@@ -51,8 +49,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('pengaduan', AdminPengaduanController::class)
         ->only(['index', 'show', 'destroy'])
         ->names([
-            'index' => 'admin.pengaduan.index',
-            'show' => 'admin.pengaduan.show',
+            'index'   => 'admin.pengaduan.index',
+            'show'    => 'admin.pengaduan.show',
             'destroy' => 'admin.pengaduan.destroy',
         ]);
 
@@ -68,14 +66,15 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/pengajuan-surat', [AdminPengajuanSuratController::class, 'index'])
         ->name('admin.pengajuan-surat.index');
 
-
-    // Ubah status surat
-    Route::post('/layanan/{id}/status', [AdminLayananController::class, 'updateStatus'])->name('admin.  layanan.updateStatus');
-    // Logout di sidebar admin (biar tetap aman dalam grup auth)
+    // ======================================================
+    // Kelola Laporan Masyarakat
+    // ======================================================
     Route::get('/laporan-masyarakat', [AdminLaporanController::class, 'index'])->name('admin.laporan');
-    Route::resource('kegiatan-masyarakat', AdminKegiatanController::class, ['as' => 'admin']);
 
->>>>>>> b14c1d046517e8c9bdb1c9e6a17627664f2e9b40
+    // ======================================================
+    // Kegiatan Masyarakat (Admin)
+    // ======================================================
+    Route::resource('kegiatan-masyarakat', AdminKegiatanController::class, ['as' => 'admin']);
 });
 
 // ======================================================
@@ -95,17 +94,23 @@ Route::get('/pengaduan', [PengaduanController::class, 'create'])->name('pengadua
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
 Route::get('/laporan', [PengaduanController::class, 'laporan'])->name('laporan.index');
 
-// Grup layanan online
+// ======================================================
+// LAYANAN ONLINE
+// ======================================================
 Route::prefix('layanan')->name('layanan.')->group(function () {
     Route::view('/donasi-desa', 'pages.layanan.donasi-desa')->name('donasi-desa');
-    // Halaman daftar kegiatan masyarakat
-    Route::get('/kegiatan-masyarakat', [App\Http\Controllers\KegiatanController::class, 'index'])->name('kegiatan-masyarakat');
 
-    // Halaman detail kegiatan masyarakat
-    Route::get('/kegiatan-masyarakat/{id}', [App\Http\Controllers\KegiatanController::class, 'show'])->name('kegiatan-masyarakat.show');
+    // Daftar dan detail kegiatan masyarakat
+    Route::get('/kegiatan-masyarakat', [KegiatanController::class, 'index'])->name('kegiatan-masyarakat');
+    Route::get('/kegiatan-masyarakat/{id}', [KegiatanController::class, 'show'])->name('kegiatan-masyarakat.show');
 
+    // Pengajuan surat masyarakat
     Route::get('/pengajuan-surat', [PengajuanSuratController::class, 'create'])->name('pengajuan-surat.form');
     Route::post('/pengajuan-surat', [PengajuanSuratController::class, 'store'])->name('pengajuan-surat.store');
+
+    // Informasi desa
     Route::get('/informasi-desa', [InformasiDesaController::class, 'index'])->name('informasi-desa');
+
+    // Laporan masyarakat
     Route::get('/laporan-masyarakat', [PengaduanController::class, 'laporan'])->name('laporan-masyarakat');
 });

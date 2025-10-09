@@ -1,81 +1,92 @@
 @extends('layouts.navbar')
 
-@section('title', 'Pengumuman')
+@section('title', 'Pengumuman Desa')
 
 @section('content')
-<div class="max-w-6xl mx-auto py-10 px-4">
-    <h1 class="text-3xl font-bold text-center text-emerald-700 mb-2">Pengumuman Desa</h1>
-    <p class="text-center text-gray-500 mb-8">Daftar pengumuman terbaru dari perangkat desa.</p>
+<div class="max-w-6xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-extrabold text-center text-emerald-700 mb-3">Pengumuman Desa</h1>
+    <p class="text-center text-gray-500 mb-10">Informasi terbaru dari perangkat desa untuk seluruh warga.</p>
 
-    <div class="space-y-6">
-        @foreach ($pengumumans as $p)
-            <!-- Card Pengumuman -->
-            <div class="bg-white p-5 rounded-lg shadow-md border hover:shadow-lg transition">
-                <div class="flex items-start gap-4">
-                    
-                    <!-- Foto -->
-                    <img src="{{ $p->gambar ? asset('storage/' . $p->gambar) : asset('images/sembako.jpg') }}" 
-                         alt="{{ $p->judul }}"
-                         class="w-32 h-24 object-cover rounded-md">
+    <!-- Grid Cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @forelse ($pengumumans as $p)
+            <div class="bg-white rounded-2xl shadow-md border hover:shadow-xl transition-all duration-300 group overflow-hidden">
+                <div class="relative">
+                    <img src="{{ $p->gambar ? asset('storage/' . $p->gambar) : asset('images/default.jpg') }}"
+                        alt="{{ $p->judul }}"
+                        class="w-full h-44 object-cover group-hover:scale-105 transition duration-300">
+                    <span class="absolute top-3 left-3 bg-emerald-600 text-white text-xs px-3 py-1 rounded-full shadow">
+                        {{ \Carbon\Carbon::parse($p->tanggal)->translatedFormat('d M Y') }}
+                    </span>
+                </div>
 
-                    <!-- Info -->
-                    <div class="flex-1">
-                        <p class="text-sm text-gray-500 mb-1 flex items-center gap-1">
-                            📅 {{ \Carbon\Carbon::parse($p->tanggal)->translatedFormat('d F Y') }}
-                        </p>
-                        <h2 class="text-lg font-semibold text-emerald-700">{{ $p->judul }}</h2>
-                        
-                        <!-- Ringkasan isi -->
-                        <p class="text-gray-600 mt-1">
-                            {{ \Illuminate\Support\Str::limit($p->isi, 80) }}
-                        </p>
+                <div class="p-5">
+                    <h2 class="text-lg font-bold text-emerald-700 mb-1 line-clamp-1">{{ $p->judul }}</h2>
+                    <p class="text-gray-600 text-sm line-clamp-2 mb-3">
+                        {{ \Illuminate\Support\Str::limit($p->isi, 90) }}
+                    </p>
 
-                        <!-- Tombol untuk buka modal -->
-                        <button onclick="document.getElementById('modal-{{ $p->id }}').classList.remove('hidden')"
-                                class="mt-2 text-sm text-emerald-600 font-semibold hover:underline">
-                            Lihat Detail →
-                        </button>
-                    </div>
+                    <button onclick="openModal('{{ $p->id }}')"
+                            class="text-sm font-semibold text-emerald-600 hover:text-emerald-800 transition">
+                        Lihat Detail →
+                    </button>
                 </div>
             </div>
 
-            <!-- Modal Detail -->
-            <div id="modal-{{ $p->id }}" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50">
-                <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 relative animate-fadeIn 
-                            max-h-[80vh] overflow-y-auto">
-                    
-                    <!-- Tombol close -->
-                    <button onclick="document.getElementById('modal-{{ $p->id }}').classList.add('hidden')"
-                            class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl">
-                        ✖
+            <!-- Modal -->
+            <div id="modal-{{ $p->id }}" 
+                 class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 backdrop-blur-sm">
+                <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full mx-4 p-6 relative animate-fadeIn max-h-[85vh] overflow-y-auto">
+                    <!-- Tombol Close -->
+                    <button onclick="closeModal('{{ $p->id }}')"
+                            class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl">
+                        &times;
                     </button>
 
-                    <!-- Gambar detail -->
-                    <img src="{{ $p->gambar ? asset('storage/' . $p->gambar) : asset('images/senam.jpg') }}" 
+                    <img src="{{ $p->gambar ? asset('storage/' . $p->gambar) : asset('images/default.jpg') }}"
                          alt="{{ $p->judul }}"
-                         class="w-full h-60 object-cover rounded-lg mb-4">
+                         class="w-full h-64 object-cover rounded-lg mb-5">
 
-                    <!-- Judul -->
                     <h2 class="text-2xl font-bold text-emerald-700 mb-2">{{ $p->judul }}</h2>
                     <p class="text-sm text-gray-500 mb-4">
                         📅 {{ \Carbon\Carbon::parse($p->tanggal)->translatedFormat('d F Y') }}
                     </p>
-                    
-                    <!-- Isi lengkap -->
+
                     <div class="text-gray-700 leading-relaxed whitespace-pre-line">
                         {!! nl2br(e($p->isi)) !!}
                     </div>
 
-                    <!-- Tombol tutup -->
                     <div class="mt-6 text-right">
-                        <button onclick="document.getElementById('modal-{{ $p->id }}').classList.add('hidden')"
+                        <button onclick="closeModal('{{ $p->id }}')"
                                 class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
                             Tutup
                         </button>
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <p class="col-span-full text-center text-gray-500 italic">Belum ada pengumuman terbaru.</p>
+        @endforelse
     </div>
 </div>
+
+<script>
+    function openModal(id) {
+        document.getElementById('modal-' + id).classList.remove('hidden');
+        document.getElementById('modal-' + id).classList.add('flex');
+    }
+    function closeModal(id) {
+        document.getElementById('modal-' + id).classList.add('hidden');
+    }
+</script>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fadeIn {
+        animation: fadeIn 0.3s ease-out;
+    }
+</style>
 @endsection

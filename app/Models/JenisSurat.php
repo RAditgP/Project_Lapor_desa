@@ -9,7 +9,7 @@ class JenisSurat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama']; // kolom di tabel jenis_surats
+   protected $fillable = ['nama_surat'];
 
     public function pengajuanSurat()
     {

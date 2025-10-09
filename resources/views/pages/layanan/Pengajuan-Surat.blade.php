@@ -74,9 +74,11 @@
                             required>
                             <option value="">-- Pilih Jenis Surat --</option>
                             @foreach($jenis_surats as $jenis)
-                                <option value="{{ $jenis->id }}" {{ old('jenis_surat_id') == $jenis->id ? 'selected' : '' }}>
-                                    {{ $jenis->nama_surat }}
-                                </option>
+                                @if(in_array($jenis->nama_surat, ['Surat Keterangan Usaha', 'Surat Domisili', 'Surat Pengantar SKCK']))
+                                    <option value="{{ $jenis->id }}" {{ old('jenis_surat_id') == $jenis->id ? 'selected' : '' }}>
+                                        {{ $jenis->nama_surat }}
+                                    </option>
+                                @endif
                             @endforeach
                         </select>
                     </div>

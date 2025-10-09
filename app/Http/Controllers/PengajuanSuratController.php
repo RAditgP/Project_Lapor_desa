@@ -9,9 +9,15 @@ class PengajuanSuratController extends Controller
 {
     public function create()
     {
-        $jenis_surats = JenisSurat::all();
+        $jenis_surats = JenisSurat::whereIn('nama_surat', [
+            'Surat Keterangan Usaha',
+            'Surat Domisili',
+            'Surat Pengantar SKCK',
+        ])->get();
+
         return view('pages.layanan.pengajuan-surat', compact('jenis_surats'));
     }
+
 
     public function store(Request $request)
     {
@@ -24,6 +30,7 @@ class PengajuanSuratController extends Controller
             'alasan' => 'nullable|string',
             'file_pendukung' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
         ]);
+        
 
         if ($request->hasFile('file_pendukung')) {
             $validated['file_pendukung'] = $request->file('file_pendukung')->store('lampiran', 'public');

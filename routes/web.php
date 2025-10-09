@@ -43,6 +43,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         'destroy' => 'admin.pengumuman.destroy',
     ]);
 
+
     // ======================================================
     // CRUD Pengaduan (Admin)
     // ======================================================
@@ -69,6 +70,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // ======================================================
     // Kelola Laporan Masyarakat
     // ======================================================
+
     Route::get('/laporan-masyarakat', [AdminLaporanController::class, 'index'])->name('admin.laporan');
 
     // ======================================================

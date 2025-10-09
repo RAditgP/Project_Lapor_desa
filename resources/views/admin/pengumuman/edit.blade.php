@@ -45,7 +45,7 @@
 
         <div class="flex justify-end gap-2">
             <a href="{{ route('admin.pengumuman.index') }}" 
-               class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg">Batal</a>
+                class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg">Batal</a>
             <button type="submit" 
                     class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Update</button>
         </div>

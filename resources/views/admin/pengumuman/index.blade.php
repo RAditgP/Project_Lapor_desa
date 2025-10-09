@@ -8,7 +8,7 @@
         <h1 class="text-2xl font-bold text-gray-800">Daftar Pengumuman</h1>
         <a href="{{ route('admin.pengumuman.create') }}" 
            class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition">
-            + Tambah Pengumuman
+           + Tambah Pengumuman
         </a>
     </div>
 
@@ -36,21 +36,22 @@
                     <td class="px-4 py-2 text-center">{{ $p->tanggal }}</td>
                     <td class="px-4 py-2 text-center">
                         @if($p->gambar)
-                            <img src="{{ asset('storage/' . $p->gambar) }}" alt="gambar" class="w-16 h-16 object-cover rounded">
+                            <img src="{{ asset('storage/' . $p->gambar) }}" 
+                                 alt="gambar" 
+                                 class="w-16 h-16 object-cover rounded">
                         @else
                             <span class="text-gray-400 italic">Tidak ada</span>
                         @endif
                     </td>
                     <td class="px-4 py-2 text-center">
                         <div class="flex justify-center gap-2">
-                            <a href="{{ route('admin.pengumuman.edit', $p->id) }}" 
-                               class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">Edit</a>
-
-                            <form action="{{ route('admin.pengumuman.destroy', $p->id) }}" method="POST" 
-                                  onsubmit="return confirm('Yakin ingin menghapus pengumuman ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
+                           <a href="{{ route('admin.pengumuman.edit', $p->id) }}" 
+                               class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
+                               Edit
+                            </a>
+                            <form action="{{ route('admin.pengumuman.destroy', $p->id) }}" method="POST">
+                                <button type="submit" 
+                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
                                     Hapus
                                 </button>
                             </form>

@@ -11,8 +11,7 @@
     <!-- Header -->
     <header class="flex justify-between items-center bg-emerald-900 text-white px-6 py-4 shadow-lg">
         <div class="font-extrabold text-2xl tracking-wide text-yellow-400">LAPOR DESA</div>
-                       <img src="{{ asset('images/logo.png') }}" alt="Logo Desa" class="w-20 h-auto">
-
+       
         <!-- Tombol hamburger -->
         <button @click="open = !open" class="sm:hidden text-yellow-400 focus:outline-none text-2xl">
             ☰
@@ -109,7 +108,8 @@
     </main>
 
    <!-- Footer -->
-<footer class="bg-emerald-900 text-white py-10 mt-10 shadow-inner" data-aos="fade-up" data-aos-duration="1000">
+<!-- Footer -->
+<footer class="bg-emerald-900 text-white py-10 mt-10">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Kolom 1: Logo & Deskripsi -->
         <div class="flex flex-col items-center md:items-start text-center md:text-left">
@@ -126,19 +126,6 @@
             <p><span class="font-semibold">Alamat:</span> Jl. Raya Desa No.123, Salatiga</p>
             <p><span class="font-semibold">Telepon:</span> +62 812 3456 7890</p>
             <p><span class="font-semibold">Email:</span> lapordesa@example.com</p>
-
-            <!-- Media Sosial -->
-            <div class="flex justify-center md:justify-start gap-4 mt-4">
-                <a href="#" class="hover:text-yellow-400 transition transform hover:scale-110">
-                    <i class="fab fa-facebook text-2xl"></i>
-                </a>
-                <a href="#" class="hover:text-yellow-400 transition transform hover:scale-110">
-                    <i class="fab fa-instagram text-2xl"></i>
-                </a>
-                <a href="#" class="hover:text-yellow-400 transition transform hover:scale-110">
-                    <i class="fab fa-youtube text-2xl"></i>
-                </a>
-            </div>
         </div>
 
         <!-- Kolom 3: Hak Cipta -->
@@ -151,16 +138,9 @@
     </div>
 </footer>
 
-<!-- Font Awesome -->
+
+<!-- Font Awesome CDN -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-<!-- AOS (Animate On Scroll) -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
-
 
     <!-- Alpine.js -->
     <script src="//unpkg.com/alpinejs" defer></script>

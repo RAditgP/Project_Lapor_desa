@@ -11,7 +11,8 @@
     <!-- Header -->
     <header class="flex justify-between items-center bg-emerald-900 text-white px-6 py-4 shadow-lg">
         <div class="font-extrabold text-2xl tracking-wide text-yellow-400">LAPOR DESA</div>
-       
+                       <img src="{{ asset('images/logo.png') }}" alt="Logo Desa" class="w-20 h-auto">
+
         <!-- Tombol hamburger -->
         <button @click="open = !open" class="sm:hidden text-yellow-400 focus:outline-none text-2xl">
             ☰
@@ -107,26 +108,59 @@
         @yield('content')
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-emerald-900 text-white py-8 shadow-inner">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-            <div class="flex flex-col items-center md:items-start">
-                <h2 class="text-lg font-bold text-yellow-400 mb-2">LAPOR DESA</h2>
-                <img src="{{ asset('images/konoha.merah.jpg') }}" alt="Logo Desa" class="w-20 h-20">
-                <p class="text-sm text-gray-300 mb-3">Layanan Aspirasi & Pengaduan Masyarakat Desa</p>
-            </div>
-            <div class="text-center md:text-left">
-                <h3 class="text-yellow-400 font-semibold mb-2">Kontak</h3>
-                <p><span class="font-semibold">Alamat:</span> Jl. Raya Desa No.123, Salatiga</p>
-                <p><span class="font-semibold">Telepon:</span> +62 812 3456 7890</p>
-                <p><span class="font-semibold">Email:</span> lapordesa@example.com</p>
-            </div>
-            <div class="text-center md:text-right">
-                <p>&copy; {{ date('Y') }} <span class="text-yellow-400">Lapor Desa</span>.</p>
-                <p class="text-sm text-gray-300">Semua Hak Dilindungi.</p>
+   <!-- Footer -->
+<footer class="bg-emerald-900 text-white py-10 mt-10 shadow-inner" data-aos="fade-up" data-aos-duration="1000">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Kolom 1: Logo & Deskripsi -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+            <h2 class="text-lg font-bold text-yellow-400 mb-3">LAPOR DESA</h2>
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Desa" class="w-20 h-auto mb-3">
+            <p class="text-sm text-gray-300 leading-relaxed">
+                Layanan Aspirasi & Pengaduan Masyarakat Desa — wadah untuk menyampaikan ide, kritik, dan saran demi kemajuan bersama.
+            </p>
+        </div>
+
+        <!-- Kolom 2: Kontak -->
+        <div class="flex flex-col justify-center text-center md:text-left">
+            <h3 class="text-yellow-400 font-semibold text-lg mb-3">Kontak</h3>
+            <p><span class="font-semibold">Alamat:</span> Jl. Raya Desa No.123, Salatiga</p>
+            <p><span class="font-semibold">Telepon:</span> +62 812 3456 7890</p>
+            <p><span class="font-semibold">Email:</span> lapordesa@example.com</p>
+
+            <!-- Media Sosial -->
+            <div class="flex justify-center md:justify-start gap-4 mt-4">
+                <a href="#" class="hover:text-yellow-400 transition transform hover:scale-110">
+                    <i class="fab fa-facebook text-2xl"></i>
+                </a>
+                <a href="#" class="hover:text-yellow-400 transition transform hover:scale-110">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                <a href="#" class="hover:text-yellow-400 transition transform hover:scale-110">
+                    <i class="fab fa-youtube text-2xl"></i>
+                </a>
             </div>
         </div>
-    </footer>
+
+        <!-- Kolom 3: Hak Cipta -->
+        <div class="flex flex-col items-center md:items-end justify-center text-center md:text-right">
+            <p class="text-sm mb-1">
+                &copy; {{ date('Y') }} <span class="text-yellow-400 font-semibold">Lapor Desa</span>.
+            </p>
+            <p class="text-gray-300 text-sm">Semua Hak Dilindungi.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<!-- AOS (Animate On Scroll) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
 
     <!-- Alpine.js -->
     <script src="//unpkg.com/alpinejs" defer></script>

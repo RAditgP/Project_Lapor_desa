@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Pengumuman;
 
 class BerandaController extends Controller
 {
     public function index()
     {
-        return view('beranda'); // resources/views/Beranda.blade.php
+        // Ambil 3 pengumuman terbaru berdasarkan tanggal
+        $pengumumans = Pengumuman::orderBy('tanggal', 'desc')->take(3)->get();
+
+        return view('pages.beranda', compact('pengumumans'));
     }
 }

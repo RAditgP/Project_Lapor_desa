@@ -37,27 +37,50 @@
             Pengumuman & Berita Terbaru
         </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach($pengumumans ?? [] as $pengumuman)
-            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-2xl hover:-translate-y-2 transform transition duration-300">
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    @forelse($pengumumans as $pengumuman)
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-2 transform transition duration-300">
+            
+            {{-- Gambar pengumuman --}}
+            @if($pengumuman->gambar)
+                <img 
+                    src="{{ asset('storage/' . $pengumuman->gambar) }}" 
+                    alt="{{ $pengumuman->judul }}" 
+                    class="w-full h-48 object-cover"
+                >
+            @else
+                <img 
+                    src="{{ asset('images/no-image.png') }}" 
+                    alt="Tidak ada gambar" 
+                    class="w-full h-48 object-cover opacity-70"
+                >
+            @endif
+
+            <div class="p-6">
                 <h3 class="text-xl font-semibold text-emerald-700 mb-2">
                     {{ $pengumuman->judul }}
                 </h3>
-                <p class="text-sm text-gray-500 mb-4">{{ $pengumuman->created_at->format('d M Y') }}</p>
-                <p class="text-gray-600 line-clamp-3">
-                    {{ $pengumuman->isi }}
+
+                <p class="text-sm text-gray-500 mb-4">
+                    {{ optional($pengumuman->created_at)->format('d M Y') ?? '-' }}
                 </p>
+
+                <p class="text-gray-600 line-clamp-3">
+                    {{ Str::limit(strip_tags($pengumuman->isi), 150) }}
+                </p>
+
                 <a href="{{ route('pengumuman.show', $pengumuman->id) }}"
-                    class="mt-4 inline-block text-emerald-600 hover:text-emerald-800 font-medium">
+                   class="mt-4 inline-block text-emerald-600 hover:text-emerald-800 font-medium">
                     Baca Selengkapnya →
                 </a>
             </div>
-            @endforeach
-
-            @if(empty($pengumumans) || count($pengumumans) == 0)
-            <p class="col-span-3 text-center text-gray-500">Belum ada pengumuman terbaru.</p>
-            @endif
         </div>
+    @empty
+        <p class="col-span-3 text-center text-gray-500">Belum ada pengumuman terbaru.</p>
+    @endforelse
+</div>
+
+
     </div>
 </section>
 

@@ -124,7 +124,7 @@
 </section>
 
 <!-- Section Tentang Desa -->
-<section id="tentang" class="bg-emerald-700 text-white py-20">
+<section id="tentang" class="bg-emerald-700 text-white py-20 mb-0">
     <div class="max-w-6xl mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold mb-6">Tentang Desa Cepogo</h2>
         <p class="text-lg leading-relaxed max-w-3xl mx-auto">

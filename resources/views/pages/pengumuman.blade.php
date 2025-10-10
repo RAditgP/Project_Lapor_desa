@@ -38,10 +38,7 @@
                  class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 backdrop-blur-sm">
                 <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full mx-4 p-6 relative animate-fadeIn max-h-[85vh] overflow-y-auto">
                     <!-- Tombol Close -->
-                    <button onclick="closeModal('{{ $p->id }}')"
-                            class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl">
-                        &times;
-                    </button>
+                  
 
                     <img src="{{ $p->gambar ? asset('storage/' . $p->gambar) : asset('images/default.jpg') }}"
                          alt="{{ $p->judul }}"

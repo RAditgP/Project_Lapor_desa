@@ -46,7 +46,13 @@ Route::resource('pengumuman', AdminPengumumanController::class)->names([
 ]);
 
     // CRUD Pengaduan (Admin): Nama rute akan menjadi 'admin.pengaduan.index', dll.
-    Route::resource('pengaduan', AdminPengaduanController::class)->only(['index', 'show', 'destroy']);
+Route::resource('pengaduan', AdminPengaduanController::class)
+    ->only(['index', 'show', 'destroy'])
+    ->names([
+        'index' => 'admin.pengaduan.index',
+        'show' => 'admin.pengaduan.show',
+        'destroy' => 'admin.pengaduan.destroy',
+    ]);
     
    Route::get('/layanan', [AdminLayananController::class, 'index'])->name('admin.layanan.index');
     Route::post('/layanan/{id}/status', [AdminLayananController::class, 'updateStatus'])->name('admin.layanan.updateStatus');
@@ -55,7 +61,6 @@ Route::resource('pengumuman', AdminPengumumanController::class)->names([
     // ADMIN
     // Halaman daftar pengajuan surat di admin
      // Logout di sidebar admin (biar tetap aman dalam grup auth)
-    Route::get('/laporan-masyarakat', [AdminLaporanController::class, 'index'])->name('admin.laporan');
     Route::resource('kegiatan-masyarakat', AdminKegiatanController::class, ['as' => 'admin']);
 
 });

@@ -18,7 +18,7 @@
             min-height: 100vh;
             color: #333;
             position: relative;
-            background-image: url('{{ asset('images/konoha_hd.jpg') }}');
+            background-image: url('{{ asset('images/beranda.jpg') }}');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;

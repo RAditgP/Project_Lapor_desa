@@ -50,6 +50,8 @@
                                Edit
                             </a>
                             <form action="{{ route('admin.pengumuman.destroy', $p->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit" 
                                         class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
                                     Hapus

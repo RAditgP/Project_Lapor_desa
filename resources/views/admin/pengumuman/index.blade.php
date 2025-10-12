@@ -45,11 +45,17 @@
                     </td>
                     <td class="px-4 py-2 text-center">
                         <div class="flex justify-center gap-2">
-                           <a href="{{ route('admin.pengumuman.edit', $p->id) }}" 
+                            <a href="{{ route('admin.pengumuman.edit', $p->id) }}" 
                                class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
                                Edit
                             </a>
-                            <form action="{{ route('admin.pengumuman.destroy', $p->id) }}" method="POST">
+
+                            <!-- Tombol hapus -->
+                            <form action="{{ route('admin.pengumuman.destroy', $p->id) }}" 
+                                  method="POST" 
+                                  onsubmit="return confirm('Yakin ingin menghapus pengumuman ini?')">
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit" 
                                         class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
                                     Hapus

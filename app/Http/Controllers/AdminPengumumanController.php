@@ -49,6 +49,15 @@ class AdminPengumumanController extends Controller
     }
 
     /**
+     * Tampilkan detail pengumuman (SHOW)
+     */
+    public function show($id)
+    {
+        $pengumuman = Pengumuman::findOrFail($id);
+        return view('admin.pengumuman.show', compact('pengumuman'));
+    }
+
+    /**
      * Form edit pengumuman (EDIT)
      */
     public function edit(Pengumuman $pengumuman)
@@ -59,30 +68,32 @@ class AdminPengumumanController extends Controller
     /**
      * Update pengumuman (UPDATE)
      */
-    public function update(Request $request, Pengumuman $pengumuman)
+    public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $pengumuman = Pengumuman::findOrFail($id);
+
+        $data = $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
             'tanggal' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Jika ada gambar baru
+        // Jika upload gambar baru
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
+            // Hapus gambar lama
             if ($pengumuman->gambar && Storage::disk('public')->exists($pengumuman->gambar)) {
                 Storage::disk('public')->delete($pengumuman->gambar);
             }
 
-            // Upload gambar baru
-            $validated['gambar'] = $request->file('gambar')->store('pengumuman_images', 'public');
+            $data['gambar'] = $request->file('gambar')->store('pengumuman_images', 'public');
         }
 
-        $pengumuman->update($validated);
+        $pengumuman->update($data);
 
-        return redirect()->route('admin.pengumuman.index')
-                         ->with('success', 'Pengumuman berhasil diperbarui!');
+        return redirect()
+            ->route('admin.pengumuman.index')
+            ->with('success', 'Pengumuman berhasil diperbarui.');
     }
 
     /**

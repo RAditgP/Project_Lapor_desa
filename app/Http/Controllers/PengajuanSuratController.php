@@ -9,11 +9,10 @@ class PengajuanSuratController extends Controller
 {
     public function create()
     {
-        $jenis_surats = JenisSurat::whereIn('nama_surat', [
-            'Surat Keterangan Usaha',
-            'Surat Domisili',
-            'Surat Pengantar SKCK',
-        ])->get();
+        // PERBAIKAN: Ambil semua jenis surat dari database.
+        // Jika Anda ingin membatasi, pastikan nama-nama di array 'whereIn' sama persis
+        // dengan nama yang ada di JenisSuratSeeder.
+        $jenis_surats = JenisSurat::all(); 
 
         return view('pages.layanan.pengajuan-surat', compact('jenis_surats'));
     }

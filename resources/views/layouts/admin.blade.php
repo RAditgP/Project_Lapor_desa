@@ -66,7 +66,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10.325 4.317a4.5 4.5 0 013.35 0l7.292 3.124a2 2 0 011.033 2.593l-7.292 16.49a2 2 0 01-3.65 0L2.067 10.034a2 2 0 011.033-2.593L10.392 4.3z" />
                     </svg>
-                    <span>Layanan Online</span>
+                    <span>Pengajuan Surat</span>
                 </a>
 
                 {{-- Kegiatan --}}

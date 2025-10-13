@@ -6,10 +6,10 @@
     <title>@yield('title', 'Lapor Desa')</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-white font-sans min-h-screen flex flex-col">
+<body class="bg-emerald-50 font-sans min-h-screen flex flex-col">
 
     <!-- Header -->
-    <header class="flex justify-between items-center bg-emerald-900 text-white px-6 py-4 shadow-lg">
+    <header class="flex justify-between items-center bg-emerald-900 text-white px-6 py-4">
         <div class="font-extrabold text-2xl tracking-wide text-yellow-400">LAPOR DESA</div>
        
         <!-- Tombol hamburger -->
@@ -19,7 +19,7 @@
     </header>
 
     <!-- Navbar -->
-    <nav class="bg-emerald-800 text-white shadow-md z-50 sticky top-0 w-full">
+    <nav class="bg-emerald-800 text-white z-50 sticky top-0 w-full">
         <!-- Menu Desktop -->
         <ul class="hidden sm:flex justify-center space-x-8 items-center py-3">
             <li><a href="{{ url('/') }}" class="hover:text-yellow-400 font-medium">Beranda</a></li>
@@ -103,46 +103,42 @@
     </nav>
 
     <!-- Konten -->
-    <main class="flex-grow">
+    <main class="flex-grow bg-emerald-50">
         @yield('content')
     </main>
 
-   <!-- Footer -->
-<!-- Footer -->
-<footer class="bg-emerald-900 text-white py-10 mt-10">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Kolom 1: Logo & Deskripsi -->
-        <div class="flex flex-col items-center md:items-start text-center md:text-left">
-            <h2 class="text-lg font-bold text-yellow-400 mb-3">LAPOR DESA</h2>
-            <img src="{{ asset('images/logo.png') }}" alt="Logo Desa" class="w-20 h-auto mb-3">
-            <p class="text-sm text-gray-300 leading-relaxed">
-                Layanan Aspirasi & Pengaduan Masyarakat Desa — wadah untuk menyampaikan ide, kritik, dan saran demi kemajuan bersama.
-            </p>
+    <!-- Footer -->
+    <footer class="bg-emerald-900 text-white py-10 mt-0">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Kolom 1 -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <h2 class="text-lg font-bold text-yellow-400 mb-3">LAPOR DESA</h2>
+                <img src="{{ asset('images/logo.png') }}" alt="Logo Desa" class="w-20 h-auto mb-3">
+                <p class="text-sm text-gray-300 leading-relaxed">
+                    Layanan Aspirasi & Pengaduan Masyarakat Desa — wadah untuk menyampaikan ide, kritik, dan saran demi kemajuan bersama.
+                </p>
+            </div>
+
+            <!-- Kolom 2 -->
+            <div class="flex flex-col justify-center text-center md:text-left">
+                <h3 class="text-yellow-400 font-semibold text-lg mb-3">Kontak</h3>
+                <p><span class="font-semibold">Alamat:</span> Jl. Raya Desa No.123, Salatiga</p>
+                <p><span class="font-semibold">Telepon:</span> +62 812 3456 7890</p>
+                <p><span class="font-semibold">Email:</span> lapordesa@example.com</p>
+            </div>
+
+            <!-- Kolom 3 -->
+            <div class="flex flex-col items-center md:items-end justify-center text-center md:text-right">
+                <p class="text-sm mb-1">
+                    &copy; {{ date('Y') }} <span class="text-yellow-400 font-semibold">Lapor Desa</span>.
+                </p>
+                <p class="text-gray-300 text-sm">Semua Hak Dilindungi.</p>
+            </div>
         </div>
+    </footer>
 
-        <!-- Kolom 2: Kontak -->
-        <div class="flex flex-col justify-center text-center md:text-left">
-            <h3 class="text-yellow-400 font-semibold text-lg mb-3">Kontak</h3>
-            <p><span class="font-semibold">Alamat:</span> Jl. Raya Desa No.123, Salatiga</p>
-            <p><span class="font-semibold">Telepon:</span> +62 812 3456 7890</p>
-            <p><span class="font-semibold">Email:</span> lapordesa@example.com</p>
-        </div>
-
-        <!-- Kolom 3: Hak Cipta -->
-        <div class="flex flex-col items-center md:items-end justify-center text-center md:text-right">
-            <p class="text-sm mb-1">
-                &copy; {{ date('Y') }} <span class="text-yellow-400 font-semibold">Lapor Desa</span>.
-            </p>
-            <p class="text-gray-300 text-sm">Semua Hak Dilindungi.</p>
-        </div>
-    </div>
-</footer>
-
-
-<!-- Font Awesome CDN -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-    <!-- Alpine.js -->
+    <!-- Font Awesome & Alpine.js -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
 </body>
 </html>

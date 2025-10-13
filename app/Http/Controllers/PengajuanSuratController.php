@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,17 +8,22 @@ use App\Models\JenisSurat;
 
 class PengajuanSuratController extends Controller
 {
+    /**
+     * Tampilkan form pengajuan surat
+     */
     public function create()
     {
-        // PERBAIKAN: Ambil semua jenis surat dari database.
-        // Jika Anda ingin membatasi, pastikan nama-nama di array 'whereIn' sama persis
-        // dengan nama yang ada di JenisSuratSeeder.
-        $jenis_surats = JenisSurat::all(); 
+        // Ambil semua jenis surat dari database
+        $jenis_surats = JenisSurat::all();
 
+
+        // Kirim ke view
         return view('pages.layanan.pengajuan-surat', compact('jenis_surats'));
     }
 
-
+    /**
+     * Simpan data pengajuan surat
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -29,15 +35,15 @@ class PengajuanSuratController extends Controller
             'alasan' => 'nullable|string',
             'file_pendukung' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
         ]);
-        
 
+        // Upload file pendukung jika ada
         if ($request->hasFile('file_pendukung')) {
             $validated['file_pendukung'] = $request->file('file_pendukung')->store('lampiran', 'public');
         }
 
+        // Simpan ke tabel pengajuan_surats
         PengajuanSurat::create($validated);
 
         return redirect()->back()->with('success', 'Pengajuan surat berhasil dikirim!');
     }
-    
 }

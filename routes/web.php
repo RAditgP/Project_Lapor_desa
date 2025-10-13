@@ -63,21 +63,37 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
             'destroy' => 'admin.pengaduan.destroy',
         ]);
 
-    /*
-    |--------------------------------------------------------------------------
-    | Kelola Layanan Umum
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/layanan', [AdminLayananController::class, 'index'])->name('admin.layanan.index');
+
+
+    // CRUD Pengumuman (Admin)
+Route::resource('pengumuman', AdminPengumumanController::class)->names([
+    'index' => 'admin.pengumuman.index',
+    'create' => 'admin.pengumuman.create',
+    'store' => 'admin.pengumuman.store',
+    'show' => 'admin.pengumuman.show',
+    'edit' => 'admin.pengumuman.edit',
+    'update' => 'admin.pengumuman.update',
+    'destroy' => 'admin.pengumuman.destroy',
+]);
+
+    // CRUD Pengaduan (Admin): Nama rute akan menjadi 'admin.pengaduan.index', dll.
+Route::resource('pengaduan', AdminPengaduanController::class)
+    ->only(['index', 'show', 'destroy'])
+    ->names([
+        'index' => 'admin.pengaduan.index',
+        'show' => 'admin.pengaduan.show',
+        'destroy' => 'admin.pengaduan.destroy',
+    ]);
+    
+   Route::get('/layanan', [AdminLayananController::class, 'index'])->name('admin.layanan.index');
     Route::post('/layanan/{id}/status', [AdminLayananController::class, 'updateStatus'])->name('admin.layanan.updateStatus');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Kelola Pengajuan Surat (Admin)
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/pengajuan-surat', [AdminPengajuanSuratController::class, 'index'])
-        ->name('admin.pengajuan-surat.index');
+    // ADMIN
+    // ADMIN
+    // Halaman daftar pengajuan surat di admin
+     // Logout di sidebar admin (biar tetap aman dalam grup auth)
+    Route::resource('kegiatan-masyarakat', AdminKegiatanController::class, ['as' => 'admin']);
+
 
     /*
     |--------------------------------------------------------------------------

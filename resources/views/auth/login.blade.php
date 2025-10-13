@@ -160,7 +160,7 @@
             </svg>
         </a>
 
-        <img src="{{ asset('images/konoha.merah.jpg') }}" alt="Logo Admin" class="login-logo">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo Admin" class="login-logo">
         <h1 class="login-title">Login Admin</h1>
 
         <form action="{{ route('login.post') }}" method="POST" class="login-form">

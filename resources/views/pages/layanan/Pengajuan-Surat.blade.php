@@ -13,14 +13,14 @@
         <div class="p-8">
             {{-- Pesan sukses --}}
             @if(session('success'))
-                <div class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative">
+                <div class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
                     <strong class="font-semibold">Berhasil!</strong> {{ session('success') }}
                 </div>
             @endif
 
             {{-- Pesan error --}}
             @if($errors->any())
-                <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative">
+                <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
                     <strong class="font-semibold">Ada kesalahan:</strong>
                     <ul class="list-disc list-inside mt-2 text-sm">
                         @foreach($errors->all() as $error)
@@ -74,11 +74,9 @@
                             required>
                             <option value="">-- Pilih Jenis Surat --</option>
                             @foreach($jenis_surats as $jenis)
-                                @if(in_array($jenis->nama_surat, ['Surat Keterangan Usaha', 'Surat Domisili', 'Surat Pengantar SKCK']))
-                                    <option value="{{ $jenis->id }}" {{ old('jenis_surat_id') == $jenis->id ? 'selected' : '' }}>
-                                        {{ $jenis->nama_surat }}
-                                    </option>
-                                @endif
+                                <option value="{{ $jenis->id }}" {{ old('jenis_surat_id') == $jenis->id ? 'selected' : '' }}>
+                                    {{ $jenis->nama_surat }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

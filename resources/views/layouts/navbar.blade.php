@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Lapor Desa')</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+
     @vite('resources/css/app.css')
 </head>
 <body class="bg-emerald-50 font-sans min-h-screen flex flex-col">
